@@ -1,0 +1,10 @@
+* {
+    box-sizing: border-box;
+    /*font-family: 'Roboto Mono', monospace;*/
+    font-family: 'VT323', monospace;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
