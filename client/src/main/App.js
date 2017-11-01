@@ -2,7 +2,7 @@ import React from "react";
 import {Switch, Route} from "react-router-dom";
 import Calculator from "./views/calculator/Placeholder";
 import Journal from "./views/journal/Placeholder";
-import Shitlist from "./views/shitlist/Placeholder";
+import Shitlist from "./views/shitlist/list/ListContainer";
 import Landing from "./views/Landing";
 
 class App extends React.Component {

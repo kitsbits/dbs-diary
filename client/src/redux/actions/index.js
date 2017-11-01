@@ -1,7 +1,7 @@
  // ACTIONS \\
-import {getList, addShit, deleteShit, editShit} from "./shitList";
+import {getList, addShit, deleteShit, editShit} from "./shitlist";
 
-export default = {
+export {
     getList,
     addShit,
     deleteShit,
