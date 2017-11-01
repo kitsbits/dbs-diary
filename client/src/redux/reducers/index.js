@@ -1,18 +1,42 @@
- // REDUCERS \\
+// REDUCERS \\
 const state = {
-    shitList: [],
-    journal: []
+   shitList: [],
+   journal: []
 }
 
 export default function reducer(prevState = state, action) {
-    switch(action.type) {
-        case "LOAD_LIST":
-            return {
-                ...prevState,
-                shitList: action.list
-            }
+   let newShits = [...prevState.shitList];
+   switch(action.type) {
+       case "LOAD_LIST":
+           return {
+               ...prevState,
+               shitList: action.list
+           }
 
-        default:
-            return prevState;
-    }
+       case "ADD_SHIT":
+           newShits.push(action.added);
+           return {
+               ...prevState,
+               shitList: newShits
+           };
+
+       case "DELETE_SHIT":
+           newShits.filter(shit => shit._id !== action.id);
+           return {
+               ...prevState,
+               shitList: newShits
+           };
+
+       case "EDIT_SHIT":
+           newShits.map(shit => {
+               if (shit._id === action.id) {
+                   return action.edited;
+               } else {
+                   return shit;
+               }
+           });
+
+       default:
+           return prevState;
+   }
 }
