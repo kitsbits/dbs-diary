@@ -1,4 +1,9 @@
 import React from "react";
+import {Switch, Route} from "react-router-dom";
+import Calculator from "./views/calculator/Placeholder";
+import Journal from "./views/journal/Placeholder";
+import Shitlist from "./views/shitlist/Placeholder";
+import Landing from "./views/Landing";
 
 class App extends React.Component {
     constructor() {
@@ -8,7 +13,12 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <h1>App Connected!</h1>
+                <Switch>
+                    <Route exact path="/" component={Landing}/>
+                    <Route path="/calculator" component={Calculator}/>
+                    <Route path="/journal" component={Journal}/>
+                    <Route path="/shitlist" component={Shitlist}/>
+                </Switch>
             </div>
         )
     }
