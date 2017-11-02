@@ -2,8 +2,8 @@ import React from "react";
 import {Switch, Route} from "react-router-dom";
 import Calculator from "./views/calculator/Placeholder";
 import Journal from "./views/journal/Placeholder";
-import Shitlist from "./views/shitlist/list/ListContainer";
 import Landing from "./views/Landing";
+import ListLanding from "./views/shitlist/list/ListLanding";
 
 class App extends React.Component {
     constructor() {
@@ -17,7 +17,7 @@ class App extends React.Component {
                     <Route exact path="/" component={Landing}/>
                     <Route path="/calculator" component={Calculator}/>
                     <Route path="/journal" component={Journal}/>
-                    <Route path="/shitlist" component={Shitlist}/>
+                    <Route path="/shitlist" component={ListLanding}/>
                 </Switch>
             </div>
         )

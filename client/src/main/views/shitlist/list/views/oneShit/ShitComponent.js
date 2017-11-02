@@ -2,12 +2,13 @@ import React from "react";
 import moment from "moment";
 
 export default function Shit(props) {
-    const date = moment(props.shit.date, "YYYYMMDD").fromNow();
+
+    // const date = moment(props.input.date).startOf('day').fromNow();
     return (
         <div>
             <div>
                 <h1>{props.input.name}</h1>
-                <h3>{date}</h3>
+                <h3>{props.input.date}</h3>
                 <h5>{props.input.location}</h5>
                 <p>{props.input.details}</p>
                 <button onClick={props.handleDelete} type="button">DELETE</button>
