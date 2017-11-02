@@ -1,5 +1,7 @@
 import React from "react";
 import AddComponent from "./AddComponent";
+import {connect} from "react-redux";
+import {addShit} from "../../../../redux/actions";
 
 class AddContainer extends React.Component {
     constructor() {
@@ -10,10 +12,11 @@ class AddContainer extends React.Component {
             details: ""
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
-        event.presist();
+        event.persist();
         const name = event.target.name;
         const newValue = event.target.value;
         this.setState(prevState => {
@@ -24,11 +27,24 @@ class AddContainer extends React.Component {
         });
     }
 
+    handleSubmit(event) {
+        event.preventDefault();
+        this.props.addShit(this.state);
+        this.setState({
+            name: "",
+            location: "",
+            details: ""
+        });
+    }
+
     render() {
         return (
-            <AddComponent/>
+            <AddComponent
+                input={this.state}
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}/>
         )
     }
 }
 
-export default AddContainer;
+export default connect(null, {addShit})(AddContainer);

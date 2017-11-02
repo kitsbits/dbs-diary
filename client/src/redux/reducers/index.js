@@ -21,10 +21,9 @@ export default function reducer(prevState = state, action) {
            };
 
        case "DELETE_SHIT":
-           newShits.filter(shit => shit._id !== action.id);
            return {
                ...prevState,
-               shitList: newShits
+               shitList: newShits.filter(shit => shit._id !== action.id)
            };
 
        case "EDIT_SHIT":
@@ -35,6 +34,7 @@ export default function reducer(prevState = state, action) {
                    return shit;
                }
            });
+           break;
 
        default:
            return prevState;

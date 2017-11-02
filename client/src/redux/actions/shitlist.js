@@ -42,7 +42,7 @@ export function deleteShit(id) {
 
 export function editShit(id, editedShit) {
     return (dispatch) => {
-        axios.put(url + id, editShit).then(response => {
+        axios.put(url + id, editedShit).then(response => {
             dispatch({
                 type: "EDIT_SHIT",
                 edited: response.data,

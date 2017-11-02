@@ -33,6 +33,7 @@ shitListRoutes.delete("/:id", (req, res) => {
 
 shitListRoutes.put("/:id", (req, res) => {
     ListItem.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, editedShit) => {
+        console.log(req.body)
         if (err) return res.status(500).send(err);
         return res.send(editedShit);
     });
