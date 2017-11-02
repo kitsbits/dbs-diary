@@ -1,19 +1,22 @@
 import React from "react";
 import EntryComponent from "./EntryComponent";
+import CalContainer from "./calendar/CalContainer";
 import {connect} from "react-redux";
-import {addEntry} from "../../../redux/actions";
+import {saveEntry, startEntry} from "../../../redux/actions";
 
 class Journal extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             details: {
-                title: "",
-                text: "",
-                lastUpdated: new Date()
-            }
+                title: props.journalEntry.title,
+                text: props.journalEntry.text,
+                lastUpdated: props.journalEntry.lastUpdated
+            },
+            id: props.journalEntry.id
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleStart = this.handleStart.bind(this);
         this.handleSave = this.handleSave.bind(this);
     }
 
@@ -26,25 +29,33 @@ class Journal extends React.Component {
                 details: {
                     ...prevState.details,
                     [name]: newValue
-                }
+                },
+                id: prevState.id
             });
         });
     }
 
+    handleStart(event) {
+        event.preventDefault();
+        this.props.startEntry(this.state.details);
+    }
+
     handleSave(event) {
         event.preventDefault();
-        // this.props.addEntry(this.state);
-        console.log("in save");
+        // this.props.saveEntry(this.state.id, this.state.details);
     }
 
     render() {
-        console.log(this.state);
+        console.log(this.props.journalEntry)
+        console.log(this.state)
         return (
             <div>
                 <EntryComponent
                     input={this.state.details}
                     handleChange={this.handleChange}
+                    handleStart={this.handleStart}
                     handleSave={this.handleSave}/>
+                <CalContainer/>
             </div>
         )
     }
@@ -54,4 +65,4 @@ function mapStateToProps(state) {
     return state;
 }
 
-export default connect(mapStateToProps, {})(Journal);
+export default connect(mapStateToProps, {saveEntry, startEntry})(Journal);
