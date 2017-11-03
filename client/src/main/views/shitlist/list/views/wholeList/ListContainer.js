@@ -17,8 +17,12 @@ class ListContainer extends React.Component {
 
     genList() {
         return this.props.shitList.map(shit => {
+            const itemContainerStyles = {
+                marginTop: "35px"
+            }
+
             return (
-                <div key={shit._id}>
+                <div style={itemContainerStyles} key={shit._id}>
                     <ListComponent
                         shit={shit}/>
 
@@ -28,10 +32,28 @@ class ListContainer extends React.Component {
     }
 
     render() {
+        const containerStyles = {
+            display: "flex",
+            justifyContent: "space-around",
+            flexWrap: "wrap"
+        }
+
+        const listContainerStyles = {
+            display: "flex",
+            width: "40%",
+            flexDirection: "column",
+            paddingLeft: "75px",
+            paddingBottom: "50px",
+            borderLeft: "2px solid green",
+            color: "green"
+        }
+
         return (
-            <div>
+            <div style={containerStyles}>
                 <AddContainer/>
-                {this.genList()}
+                <div style={listContainerStyles}>
+                    {this.genList()}
+                </div>
             </div>
         )
     }
