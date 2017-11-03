@@ -14,12 +14,11 @@ class CalContainer extends React.Component {
         const now = new Date();
         const days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate()
         const daysBeforeFirst = moment().startOf('month').day() - 1;
-        console.log(daysBeforeFirst);
 
         const daysArray = [];
         let daysBeforeFirstCount = 0;
-        for (let i = 0; i < days + daysBeforeFirst; i++) {
-            if (daysBeforeFirstCount < daysBeforeFirst) {
+        for (let i = 0; i < 35; i++) {
+            if (daysBeforeFirstCount < daysBeforeFirst || i > days + daysBeforeFirst - 1) {
                 daysArray.push("");
                 daysBeforeFirstCount++;
             } else {
@@ -71,10 +70,10 @@ class CalContainer extends React.Component {
                     <p>S</p>
                 </h3>
                 <div style={calendarGridStyles}>
-                    {this.state.thisMonthsDays.map(day => {
+                    {this.state.thisMonthsDays.map((day, i) => {
                         return (
                             <Day
-                                key={day}
+                                key={i}
                                 day={day}/>
                         )
                     })}

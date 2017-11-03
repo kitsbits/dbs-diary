@@ -27,3 +27,16 @@ export function startEntry(entry) {
         });
     }
 }
+
+export function deleteEntry(id) {
+    return (dispatch) => {
+        axios.delete(url + id).then(response => {
+            dispatch({
+                type: "DELETE_ENTRY",
+                id
+            });
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+}

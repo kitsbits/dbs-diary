@@ -1,12 +1,6 @@
 // REDUCERS \\
 const state = {
-   shitList: [],
-   journalEntry: {
-       title: "",
-       text: "",
-       lastUpdated: "",
-       id: ""
-   }
+   shitList: []
 }
 
 export default function reducer(prevState = state, action) {
@@ -47,17 +41,11 @@ export default function reducer(prevState = state, action) {
                 journalEntry: action.savedEntry
             };
 
-        case "START_ENTRY":
-            console.log(action.startedEntry);
+        case "DELETE_ENTRY":
+            console.log("in here")
             return {
-                ...prevState,
-                journalEntry: {
-                    title: action.startedEntry.title,
-                    text: action.startedEntry.text,
-                    lastUpdated: action.startedEntry.lastUpdated,
-                    id: action.startedEntry._id
-                }
-            };
+                ...prevState
+            }
 
        default:
            return prevState;

@@ -1,23 +1,18 @@
 import React from "react";
+import axios from "axios";
 import EntryComponent from "./EntryComponent";
 import CalContainer from "./calendar/CalContainer";
 import {connect} from "react-redux";
-import {saveEntry, startEntry} from "../../../redux/actions";
+import {saveEntry, startEntry, deleteEntry} from "../../../redux/actions";
 
 class Journal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            details: {
-                title: props.journalEntry.title,
-                text: props.journalEntry.text,
-                lastUpdated: props.journalEntry.lastUpdated
-            },
-            id: props.journalEntry.id
-        }
+        this.state = {};
         this.handleChange = this.handleChange.bind(this);
         this.handleStart = this.handleStart.bind(this);
         this.handleSave = this.handleSave.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     handleChange(event) {
@@ -26,26 +21,44 @@ class Journal extends React.Component {
             const name = event.target.name;
             const newValue = event.target.value;
             return({
-                details: {
-                    ...prevState.details,
-                    [name]: newValue
-                },
-                id: prevState.id
+                ...prevState,
+                [name]: newValue
             });
         });
     }
 
     handleStart(event) {
         event.preventDefault();
-        this.props.startEntry(this.state.details);
+        const url = "http://localhost:10100/journal/";
+        axios.post(url, {title: ""}).then(response => {
+            this.setState(response.data);
+        }).catch(err => {
+            console.log(err);
+        });
+        document.getElementById("entry-form").disabled = false;
+        document.getElementById("save-button").disabled = false;
+        document.getElementById("delete-button").disabled = false;
     }
 
     handleSave(event) {
         event.preventDefault();
-        // this.props.saveEntry(this.state.id, this.state.details);
+        this.props.saveEntry(this.state._id, this.state);
+    }
+
+    handleDelete(event) {
+        if (window.confirm("Are you sure you want to delete this entry?") === true) {
+            this.props.deleteEntry(this.state._id);
+            this.setState({
+                title: "",
+                text: ""
+            });
+            document.getElementById("entry-form").disabled = true;
+            document.getElementById("save-button").disabled = true;
+        }
     }
 
     render() {
+        console.log(this.state)
         const containerStyles = {
             display: "flex",
             justifyContent: "space-around"
@@ -53,10 +66,11 @@ class Journal extends React.Component {
         return (
             <div style={containerStyles}>
                 <EntryComponent
-                    input={this.state.details}
+                    input={this.state}
                     handleChange={this.handleChange}
                     handleStart={this.handleStart}
-                    handleSave={this.handleSave}/>
+                    handleSave={this.handleSave}
+                    handleDelete={this.handleDelete}/>
                 <CalContainer/>
             </div>
         )
@@ -67,4 +81,4 @@ function mapStateToProps(state) {
     return state;
 }
 
-export default connect(mapStateToProps, {saveEntry, startEntry})(Journal);
+export default connect(mapStateToProps, {saveEntry, startEntry, deleteEntry})(Journal);
