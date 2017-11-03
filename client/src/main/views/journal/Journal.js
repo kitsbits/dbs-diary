@@ -46,10 +46,12 @@ class Journal extends React.Component {
     }
 
     render() {
-        console.log(this.props.journalEntry)
-        console.log(this.state)
+        const containerStyles = {
+            display: "flex",
+            justifyContent: "space-around"
+        }
         return (
-            <div>
+            <div style={containerStyles}>
                 <EntryComponent
                     input={this.state.details}
                     handleChange={this.handleChange}

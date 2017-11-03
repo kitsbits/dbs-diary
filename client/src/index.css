@@ -12,3 +12,8 @@ body {
 textarea {
   resize: none;
 }
+
+input::placeholder,
+textarea::placeholder {
+    color: white;
+}
