@@ -7,28 +7,24 @@ import axios from "axios";
 class ShitContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            name: "",
-            location: "",
-            details: "",
-            date: ""
-        }
+        this.state = {}
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
     }
 
     componentDidMount() {
         axios.get(`http://localhost:10100/shitlist/${this.props.match.params.id}`).then(response => {
-            this.setState({
-                name: response.data.name,
-                location: response.data.location,
-                details: response.data.details,
-                date: response.data.date
-            });
+            this.setState(response.data);
         }).catch(err => {
             console.log(err);
         });
+    }
+
+    handleToggle(event) {
+        event.target.parentElement.style.display = "none";
+        event.target.parentElement.nextSibling.style.display = "flex";
     }
 
     handleChange(event) {
@@ -45,7 +41,9 @@ class ShitContainer extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.editShit(this.props.shit._id, this.state);
+        this.props.editShit(this.state._id, this.state);
+        event.target.style.display = "none";
+        event.target.previousSibling.style.display = "flex";
     }
 
     handleDelete() {
@@ -57,7 +55,8 @@ class ShitContainer extends React.Component {
                     input={this.state}
                     handleChange={this.handleChange}
                     handleSubmit={this.handleSubmit}
-                    handleDelete={this.handleDelete}/>
+                    handleDelete={this.handleDelete}
+                    handleToggle={this.handleToggle}/>
     }
 }
 
