@@ -35,12 +35,13 @@ class ListContainer extends React.Component {
         const containerStyles = {
             display: "flex",
             justifyContent: "space-around",
-            flexWrap: "wrap"
+            flexWrap: "wrap",
+            marginTop: "55px"
         }
 
         const listContainerStyles = {
             display: "flex",
-            width: "40%",
+            width: "45%",
             flexDirection: "column",
             paddingLeft: "75px",
             paddingBottom: "50px",

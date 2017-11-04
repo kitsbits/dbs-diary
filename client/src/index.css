@@ -17,3 +17,7 @@ input::placeholder,
 textarea::placeholder {
     color: white;
 }
+
+.add-input::placeholder {
+    color: red;
+}
