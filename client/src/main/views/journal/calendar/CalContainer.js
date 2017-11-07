@@ -83,7 +83,17 @@ class CalContainer extends React.Component {
         this.getMonthsPosts();
     }
 
+    // handleClick(event) {
+    //     this.setState(prevState => {
+    //         return {
+    //             ...prevState,
+    //
+    //         }
+    //     });
+    // }
+
     render() {
+        // console.log(window.location)
         const calendarGridStyles = {
             width: "245px",
             height: "170px",
@@ -106,6 +116,7 @@ class CalContainer extends React.Component {
             margin: "0",
             fontSize: "1.5em"
         }
+
         return (
             <div>
                 <h1 style={headerStyles}>THIS MONTH:</h1>

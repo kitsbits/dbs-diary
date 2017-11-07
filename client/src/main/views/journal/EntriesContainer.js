@@ -12,8 +12,18 @@ class EntriesContainer extends React.Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location.pathname !== this.props.location.pathname) {
+            this.getEntries(nextProps.location.pathname);
+        }
+    }
+
     componentDidMount() {
-        axios.get(url+this.props.location.pathname).then(response => {
+        this.getEntries(this.props.location.pathname);
+    }
+
+    getEntries(pathname) {
+        axios.get(url+pathname).then(response => {
             this.setState({
                 entries: response.data
             });
