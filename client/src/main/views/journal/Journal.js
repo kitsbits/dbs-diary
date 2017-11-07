@@ -1,9 +1,11 @@
 import React from "react";
 import axios from "axios";
-import EntryComponent from "./EntryComponent";
+import JournalComponent from "./JournalComponent";
 import CalContainer from "./calendar/CalContainer";
+import EntriesContainer from "./EntriesContainer";
 import {connect} from "react-redux";
 import {saveEntry, startEntry, deleteEntry} from "../../../redux/actions";
+import {Switch, Route} from "react-router-dom";
 
 class Journal extends React.Component {
     constructor(props) {
@@ -61,16 +63,24 @@ class Journal extends React.Component {
         console.log(this.state)
         const containerStyles = {
             display: "flex",
-            justifyContent: "space-around"
+            justifyContent: "space-around",
+            flexWrap: "wrap"
         }
         return (
             <div style={containerStyles}>
-                <EntryComponent
-                    input={this.state}
-                    handleChange={this.handleChange}
-                    handleStart={this.handleStart}
-                    handleSave={this.handleSave}
-                    handleDelete={this.handleDelete}/>
+                <Switch>
+                    <Route exact path="/journal" render={props => {
+                                return (
+                                    <JournalComponent
+                                        input={this.state}
+                                        handleChange={this.handleChange}
+                                        handleStart={this.handleStart}
+                                        handleSave={this.handleSave}
+                                        handleDelete={this.handleDelete}{...props}/>
+                                )
+                            }}/>
+                        <Route path="/journal/:year/:month/:day" component={EntriesContainer}/>
+                </Switch>
                 <CalContainer/>
             </div>
         )

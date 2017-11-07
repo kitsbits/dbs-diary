@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function EntryComponent(props) {
+export default function JournalComponent(props) {
     const containerStyles = {
         display: "flex",
         flexDirection: "column",

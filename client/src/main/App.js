@@ -2,7 +2,6 @@ import React from "react";
 import {Switch, Route} from "react-router-dom";
 import Calculator from "./views/calculator/Placeholder";
 import Journal from "./views/journal/Journal";
-import Entries from "./views/journal/Entries";
 import Landing from "./views/Landing";
 import ListLanding from "./views/shitlist/list/ListLanding";
 
@@ -19,7 +18,6 @@ class App extends React.Component {
                     <Route path="/calculator" component={Calculator}/>
                     <Route path="/journal" component={Journal}/>
                     <Route path="/shitlist" component={ListLanding}/>
-                    <Route path="/entries" component={Entries}/>
                 </Switch>
             </div>
         )

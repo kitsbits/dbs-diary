@@ -19,7 +19,6 @@ class CalContainer extends React.Component {
             yearsPosts: [],
             daysPosts: []
         }
-        this.getDaysPosts = this.getDaysPosts.bind(this);
     }
 
     genThisMonthCalendar() {
@@ -28,7 +27,6 @@ class CalContainer extends React.Component {
             arr.push(daysWithPostsNumbers);
             return arr;
         }, []);
-        console.log(daysWithPostsArray);
         const daysBeforeFirst = moment().startOf('month').day() - 1;
         const daysArray = [];
         let daysBeforeFirstCount = 0;
@@ -38,7 +36,7 @@ class CalContainer extends React.Component {
                 daysBeforeFirstCount++;
             } else {
 
-                if (daysWithPostsArray.includes(i - daysBeforeFirst)) {
+                if (daysWithPostsArray.includes(i - daysBeforeFirst + 1)) {
                     daysArray.push({
                         date: i - daysBeforeFirst,
                         color: "yellow",
@@ -81,32 +79,11 @@ class CalContainer extends React.Component {
         });
     }
 
-    getDaysPosts(day) {
-        axios.get("http://localhost:10100/entries", {
-            params: {
-                year: this.state.year,
-                month: this.state.month,
-                day: day
-            }
-        }).then(response => {
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    daysPosts: response.data
-                }
-            });
-        }).catch(err => {
-            console.log(err);
-        });
-    }
-
     componentDidMount() {
         this.getMonthsPosts();
     }
 
     render() {
-        console.log(this.state);
-
         const calendarGridStyles = {
             width: "245px",
             height: "170px",
@@ -147,7 +124,8 @@ class CalContainer extends React.Component {
                             <Day
                                 key={i}
                                 day={day}
-                                getPosts={this.getDaysPosts}/>
+                                year={this.state.year}
+                                month={this.state.month}/>
                         )
                     })}
                 </div>

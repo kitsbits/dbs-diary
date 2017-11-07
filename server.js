@@ -9,7 +9,6 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/shitlist", require("./routes/shitList"));
 app.use("/journal", require("./routes/journal"));
-app.use("/entries", require("./routes/entries"));
 
 mongoose.connect("mongodb://localhost/diary",
     { keepAlive: true, reconnectTries: Number.MAX_VALUE, useMongoClient: true },

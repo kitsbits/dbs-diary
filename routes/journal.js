@@ -30,6 +30,34 @@ journalRoutes.get("/", (req, res) => {
     })
 });
 
+journalRoutes.get("/:year/:month/:day", (req, res) => {
+    const query = JournalEntry.find();
+    if (req.params.day) {
+        const nextDay = (Number(req.params.day) + 1).toString();
+        query
+        .where("createdAt")
+        .gte(new Date(req.params.year, req.params.month, req.params.day))
+        .lt(new Date(req.params.year, req.params.month, nextDay))
+    } else if (req.params.month) {
+        const nextMonth = (Number(req.params.month) + 1).toString();
+        params
+        .where("createdAt")
+        .gte(new Date(req.params.year, req.params.month))
+        .lt(new Date(req.params.year, nextMonth))
+    } else if (req.params.year) {
+        const nextYear = (Number(req.params.year) + 1).toString();
+        params
+        .where("createdAt")
+        .gte(new Date(req.params.year))
+        .lt(new Date(nextYear))
+    }
+
+    query.exec((err, entries) => {
+        if (err) return res.status(500).send(err);
+        return res.send(entries);
+    })
+});
+
 journalRoutes.get("/:id", (req, res) => {
     JournalEntry.findById(req.params.id, (err, entry) => {
         if (err) return res.status(500).send(err);

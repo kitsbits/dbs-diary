@@ -27,7 +27,7 @@ export default function Day(props) {
 
     return (
         props.day.post ?
-            <Link to="/entries" style={props.day === "" ? blankDayStyles : dayStyles}>{props.day.date + 1}</Link>
+            <Link to={`/journal/${props.year}/${props.month}/${props.day.date + 1}`} style={props.day === "" ? blankDayStyles : dayStyles}>{props.day.date + 1}</Link>
         :
             <h3 style={props.day === "" ? blankDayStyles : dayStyles}>{props.day === "" ? props.day.date : props.day.date + 1}</h3>
 
