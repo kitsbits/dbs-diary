@@ -9,11 +9,15 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/shitlist", require("./routes/shitList"));
 app.use("/journal", require("./routes/journal"));
+app.use("/entries", require("./routes/entries"));
 
-mongoose.connect("mongodb://localhost/diary", err => {
-    if (err) throw err;
-    console.log("Connected to the diary database");
-});
+mongoose.connect("mongodb://localhost/diary",
+    { keepAlive: true, reconnectTries: Number.MAX_VALUE, useMongoClient: true },
+    err => {
+        if (err) throw err;
+        console.log("Connected to the diary database");
+    }
+);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

@@ -3,10 +3,31 @@ const journalRoutes = express.Router();
 const JournalEntry = require("../models/journalEntry");
 
 journalRoutes.get("/", (req, res) => {
-    JournalEntry.find((err, journal) => {
+    let query = JournalEntry.find();
+    if (req.query.day) {
+        const nextDay = (Number(req.query.day) + 1).toString();
+        query
+        .where("createdAt")
+        .gte(new Date(req.query.year, req.query.month, req.query.day))
+        .lt(new Date(req.query.year, req.query.month, nextDay))
+    } else if (req.query.month) {
+        const nextMonth = (Number(req.query.month) + 1).toString();
+        query
+        .where("createdAt")
+        .gte(new Date(req.query.year, req.query.month))
+        .lt(new Date(req.query.year, nextMonth))
+    } else if (req.query.year) {
+        const nextYear = (Number(req.query.year) + 1).toString();
+        query
+        .where("createdAt")
+        .gte(new Date(req.query.year))
+        .lt(new Date(nextYear))
+    }
+
+    query.exec((err, entries) => {
         if (err) return res.status(500).send(err);
-        return res.send(journal);
-    });
+        return res.send(entries);
+    })
 });
 
 journalRoutes.get("/:id", (req, res) => {

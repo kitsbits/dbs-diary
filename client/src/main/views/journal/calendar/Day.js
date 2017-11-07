@@ -1,15 +1,17 @@
 import React from "react";
+import {Link} from "react-router-dom"
 
 export default function Day(props) {
     const dayStyles = {
-        border: "1px solid white",
-        color: "white",
+        border: `1px solid ${props.day.color}`,
+        color: `${props.day.color}`,
         padding: "5px",
         fontSize: "1em",
         margin: "5px",
         height: "25px",
         width: "25px",
-        display: "inline"
+        display: "inline",
+        textDecoration: "none"
     }
 
     const blankDayStyles = {
@@ -24,8 +26,10 @@ export default function Day(props) {
     }
 
     return (
-            <h3 style={props.day === "" ? blankDayStyles : dayStyles}>
-                {props.day === "" ? props.day : props.day + 1}
-            </h3>
+        props.day.post ?
+            <Link to="/entries" style={props.day === "" ? blankDayStyles : dayStyles}>{props.day.date + 1}</Link>
+        :
+            <h3 style={props.day === "" ? blankDayStyles : dayStyles}>{props.day === "" ? props.day.date : props.day.date + 1}</h3>
+
     )
 }
