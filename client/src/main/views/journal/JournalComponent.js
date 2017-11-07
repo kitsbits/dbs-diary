@@ -74,10 +74,6 @@ export default function JournalComponent(props) {
         alignSelf: "flex-end"
     }
 
-    const lockStyles = {
-        color: "grey"
-    }
-
     return (
         <div style={containerStyles}>
             <h1>HELLO, THERE. TELL ME YOUR SECRETS...</h1>

@@ -1,10 +1,8 @@
 import React from "react";
 import AddContainer from "../../../addform/AddContainer";
 import ListComponent from "./ListComponent";
-import ShitContainer from "../oneShit/ShitContainer";
 import {connect} from "react-redux";
 import {getList} from "../../../../../../redux/actions/index.js";
-import {Switch, Route} from "react-router-dom";
 
 class ListContainer extends React.Component {
     constructor() {

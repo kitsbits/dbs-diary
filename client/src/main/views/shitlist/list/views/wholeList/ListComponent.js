@@ -3,8 +3,7 @@ import moment from "moment";
 import {Link} from "react-router-dom";
 
 export default function ListComponent(props) {
-    // DON'T FORGET TO UPDATE THIS SCHEMA TO NOT INCLUDE THE DATE
-    const date = moment(props.shit.date, "YYYYMMDD").fromNow();
+    const date = moment(props.shit.createdAt).format('MMMM Do');
 
     const nameStyles = {
         margin: "0"

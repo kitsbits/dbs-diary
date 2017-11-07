@@ -3,6 +3,7 @@ import axios from "axios";
 import JournalComponent from "./JournalComponent";
 import CalContainer from "./calendar/CalContainer";
 import EntriesContainer from "./EntriesContainer";
+import Navbar from "../../Navbar";
 import {connect} from "react-redux";
 import {saveEntry, startEntry, deleteEntry} from "../../../redux/actions";
 import {Switch, Route} from "react-router-dom";
@@ -67,21 +68,24 @@ class Journal extends React.Component {
             flexWrap: "wrap"
         }
         return (
-            <div style={containerStyles}>
-                <Switch>
-                    <Route exact path="/journal" render={props => {
-                                return (
-                                    <JournalComponent
-                                        input={this.state}
-                                        handleChange={this.handleChange}
-                                        handleStart={this.handleStart}
-                                        handleSave={this.handleSave}
-                                        handleDelete={this.handleDelete}{...props}/>
-                                )
-                            }}/>
-                        <Route path="/journal/:year/:month/:day" component={EntriesContainer}/>
-                </Switch>
-                <CalContainer/>
+            <div>
+                <Navbar/>
+                <div style={containerStyles}>
+                    <Switch>
+                        <Route exact path="/journal" render={props => {
+                                    return (
+                                        <JournalComponent
+                                            input={this.state}
+                                            handleChange={this.handleChange}
+                                            handleStart={this.handleStart}
+                                            handleSave={this.handleSave}
+                                            handleDelete={this.handleDelete}{...props}/>
+                                    )
+                                }}/>
+                            <Route path="/journal/:year/:month/:day" component={EntriesContainer}/>
+                    </Switch>
+                    <CalContainer/>
+                </div>
             </div>
         )
     }

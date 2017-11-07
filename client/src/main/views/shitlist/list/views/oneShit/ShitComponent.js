@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 
 export default function Shit(props) {
-    // const date = moment(props.input.date).startOf('day').fromNow();
+    const date = moment(props.input.createdAt).format('MMMM Do YYYY, h:mm:ss a');
     const containerStyles = {
         display: "flex",
         padding: "55px"
@@ -114,7 +114,7 @@ export default function Shit(props) {
         <div style={containerStyles}>
             <div style={shitContainerStyles}>
                 <h1 style={nameStyles}>{props.input.name}</h1>
-                <h3 style={dateStyles}>{props.input.date}</h3>
+            <h3 style={dateStyles}>{date}</h3>
                 <h5 style={locationStyles}>{props.input.location}</h5>
                 <p style={detailsContainer}>{props.input.details}</p>
                 <button onClick={props.handleToggle} type="button" style={editButtonStyles}>EDIT</button>

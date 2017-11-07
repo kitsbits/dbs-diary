@@ -7,11 +7,7 @@ const ListItemSchema = new Schema({
         required: true
     },
     location: String,
-    details: String,
-    date: {
-        type: Date,
-        default: Date.now
-    }
-});
+    details: String
+}, { timestamps: true });
 
 module.exports = mongoose.model("ListItem", ListItemSchema);
