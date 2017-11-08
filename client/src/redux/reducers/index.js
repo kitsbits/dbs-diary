@@ -42,10 +42,9 @@ export default function reducer(prevState = state, action) {
             };
 
         case "DELETE_ENTRY":
-            console.log("in here")
             return {
                 ...prevState
-            }
+            };
 
        default:
            return prevState;

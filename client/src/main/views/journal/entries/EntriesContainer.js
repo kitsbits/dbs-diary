@@ -10,6 +10,7 @@ class EntriesContainer extends React.Component {
         this.state = {
             entries: []
         };
+        this.getEntries = this.getEntries.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -38,7 +39,9 @@ class EntriesContainer extends React.Component {
                 <Entry
                         key={entry._id}
                         entry={entry}
-                        count={i + 1}/>
+                        count={i + 1}
+                        getEntries={this.getEntries}
+                        pathname={this.props.location.pathname}/>
             )
         });
     }
@@ -46,7 +49,8 @@ class EntriesContainer extends React.Component {
     render() {
         const containerStyles = {
             display: "flex",
-            flexDirection: "column",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
             width: "65%",
             padding: "25px"
         }

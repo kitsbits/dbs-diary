@@ -44,7 +44,7 @@ export default function JournalComponent(props) {
         marginLeft: "15px",
         cursor: "pointer",
         marginRight: "55px",
-        display: props.input.title === undefined ? "none" : "inherit"
+        display: props.input.title === undefined ? "none" : "inline"
     }
 
     const titleInputStyles = {
@@ -79,12 +79,12 @@ export default function JournalComponent(props) {
         <div style={containerStyles}>
             <h1>HELLO, THERE. TELL ME YOUR SECRETS...</h1>
             <button onClick={props.handleStart} type="button" style={startButtonStyles}>START NEW ENTRY</button>
-            <form id="entry-form" onSubmit={props.handleSave} style={formStyles} disabled>
+            <form id="entry-form" onSubmit={props.handleSave} style={formStyles}>
                 <input onChange={props.handleChange} type="text" name="title" value={props.input.title} placeholder="ENTRY TITLE..." style={titleInputStyles}/>
                 <textarea onChange={props.handleChange} name="text" placeholder="LET IT OUT..." value={props.input.text} style={entryTextStyles}></textarea>
                 <div style={buttonContainerStyles}>
                     <button id="delete-button" onClick={props.handleDelete} type="button" style={deleteButtonStyles}>DELETE ENTRY</button>
-                    <button id="save-button" type="submit" style={saveButtonStyles} disabled>SAVE ENTRY</button>
+                    <button id="save-button" type="submit" style={saveButtonStyles}>SAVE ENTRY</button>
                 </div>
             </form>
         </div>
