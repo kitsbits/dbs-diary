@@ -1,98 +1,29 @@
 import React from "react";
-import axios from "axios";
-import JournalComponent from "./JournalComponent";
+import JournalContainer from "./journal/JournalContainer";
 import CalContainer from "./calendar/CalContainer";
-import EntriesContainer from "./EntriesContainer";
+import EntriesContainer from "./entries/EntriesContainer";
 import Navbar from "../../Navbar";
-import {connect} from "react-redux";
-import {saveEntry, startEntry, deleteEntry} from "../../../redux/actions";
+
 import {Switch, Route} from "react-router-dom";
 
-class Journal extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-        this.handleChange = this.handleChange.bind(this);
-        this.handleStart = this.handleStart.bind(this);
-        this.handleSave = this.handleSave.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
+export default function Journal() {
+    const containerStyles = {
+        display: "flex",
+        justifyContent: "space-around",
+        flexWrap: "wrap"
     }
 
-    handleChange(event) {
-        event.persist();
-        this.setState(prevState => {
-            const name = event.target.name;
-            const newValue = event.target.value;
-            return({
-                ...prevState,
-                [name]: newValue
-            });
-        });
-    }
-
-    handleStart(event) {
-        event.preventDefault();
-        const url = "http://localhost:10100/journal/";
-        axios.post(url, {title: ""}).then(response => {
-            this.setState(response.data);
-        }).catch(err => {
-            console.log(err);
-        });
-        document.getElementById("entry-form").disabled = false;
-        document.getElementById("save-button").disabled = false;
-        document.getElementById("delete-button").disabled = false;
-    }
-
-    handleSave(event) {
-        event.preventDefault();
-        this.props.saveEntry(this.state._id, this.state);
-    }
-
-    handleDelete(event) {
-        if (window.confirm("Are you sure you want to delete this entry?") === true) {
-            this.props.deleteEntry(this.state._id);
-            this.setState({
-                title: "",
-                text: ""
-            });
-            document.getElementById("entry-form").disabled = true;
-            document.getElementById("save-button").disabled = true;
-        }
-    }
-
-    render() {
-        console.log(this.state)
-        const containerStyles = {
-            display: "flex",
-            justifyContent: "space-around",
-            flexWrap: "wrap"
-        }
-        return (
-            <div>
-                <Navbar/>
-                <div style={containerStyles}>
-                    <Switch>
-                        <Route exact path="/journal" render={props => {
-                                    return (
-                                        <JournalComponent
-                                            input={this.state}
-                                            handleChange={this.handleChange}
-                                            handleStart={this.handleStart}
-                                            handleSave={this.handleSave}
-                                            handleDelete={this.handleDelete}{...props}/>
-                                    )
-                                }}/>
-                            <Route path="/journal/:year/:month/:day" component={EntriesContainer}/>
-                    </Switch>
-                    <CalContainer/>
-                </div>
+    return (
+        <div>
+            <Navbar/>
+            <div style={containerStyles}>
+                <Switch>
+                    <Route exact path="/journal" component={JournalContainer}/>
+                    <Route path="/journal/:year/:month/:day" component={EntriesContainer}/>
+                    <Route path="/journal/:id" component={JournalContainer}/>
+                </Switch>
+                <CalContainer/>
             </div>
-        )
-    }
+        </div>
+    )
 }
-
-function mapStateToProps(state) {
-    return state;
-}
-
-export default connect(mapStateToProps, {saveEntry, startEntry, deleteEntry})(Journal);

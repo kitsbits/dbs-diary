@@ -43,7 +43,8 @@ export default function JournalComponent(props) {
         marginTop: "25px",
         marginLeft: "15px",
         cursor: "pointer",
-        marginRight: "55px"
+        marginRight: "55px",
+        display: props.input.title === undefined ? "none" : "inherit"
     }
 
     const titleInputStyles = {
