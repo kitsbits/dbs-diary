@@ -10,6 +10,8 @@ import {connect} from "react-redux";
 import moment from "moment";
 import axios from "axios";
 
+import * as api from "../../../api";
+
 const url = "http://localhost:10100/journal/";
 const now = new Date();
 const days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
@@ -39,7 +41,7 @@ class Journal extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleStart = this.handleStart.bind(this);
         this.handleSave = this.handleSave.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
         this.getEntry = this.getEntry.bind(this);
         this.getEntries = this.getEntries.bind(this);
     }
@@ -147,18 +149,21 @@ class Journal extends React.Component {
         this.getMonthsPosts();
     }
 
-    handleDelete(event) {
+    handleCancel(event) {
         if (window.confirm("Are you sure you want to delete this entry?") === true) {
-            this.props.deleteEntry(this.state.journal._id);
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    journal: {
-                        ...prevState.journal,
-                        title: "",
-                        text: ""
+            api.deleteEntry(this.state.journal._id).then(response => {
+                this.setState(prevState => {
+                    return {
+                        ...prevState,
+                        journal: {
+                            ...prevState.journal,
+                            title: "",
+                            text: ""
+                        }
                     }
-                }
+                });
+            }).catch(err => {
+                console.log(err);
             });
             document.getElementById("entry-form").disabled = true;
             document.getElementById("save-button").disabled = true;
@@ -220,7 +225,7 @@ class Journal extends React.Component {
                                         handleChange={this.handleChange}
                                         handleStart={this.handleStart}
                                         handleSave={this.handleSave}
-                                        handleDelete={this.handleDelete}{...props}/>
+                                        handleCancel={this.handleCancel}{...props}/>
                             )
                         }}/>
                         <Route path="/journal/:year/:month/:day" render={props => {
@@ -237,7 +242,7 @@ class Journal extends React.Component {
                                         handleChange={this.handleChange}
                                         handleStart={this.handleStart}
                                         handleSave={this.handleSave}
-                                        handleDelete={this.handleDelete}
+                                        handleCancel={this.handleCancel}
                                         getEntry={this.getEntry}{...props}/>
                             )
                         }}/>

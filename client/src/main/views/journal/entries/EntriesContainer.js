@@ -7,9 +7,6 @@ const url = "http://localhost:10100";
 class EntriesContainer extends React.Component {
     constructor() {
         super();
-        // this.state = {
-        //     entries: []
-        // };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -18,9 +15,9 @@ class EntriesContainer extends React.Component {
         }
     }
 
-    // componentDidMount() {
-    //     this.props.getEntries(this.props.location.pathname);
-    // }
+    componentDidMount() {
+        this.props.getEntries(this.props.location.pathname);
+    }
 
     genEntries() {
         return this.props.state.map((entry, i) => {
@@ -36,7 +33,6 @@ class EntriesContainer extends React.Component {
     }
 
     render() {
-        this.props.getEntries(this.props.location.pathname);
 
         const containerStyles = {
             display: "flex",
