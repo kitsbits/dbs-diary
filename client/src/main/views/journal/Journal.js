@@ -10,7 +10,7 @@ import {connect} from "react-redux";
 import moment from "moment";
 import axios from "axios";
 
-const url = "http://localhost:10100/journal";
+const url = "http://localhost:10100/journal/";
 const now = new Date();
 const days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
 
@@ -33,13 +33,15 @@ class Journal extends React.Component {
                 yearsPosts: [],
                 daysPosts: []
             },
-            journal: {}
+            journal: {},
+            entries: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleStart = this.handleStart.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.getEntry = this.getEntry.bind(this);
+        this.getEntries = this.getEntries.bind(this);
     }
     ////////////////////////
     /// CALENDAR METHODS \\\
@@ -127,7 +129,6 @@ class Journal extends React.Component {
 
     handleStart(event) {
         event.preventDefault();
-        let url = "http://localhost:10100/journal/";
         axios.post(url, {title: ""}).then(response => {
             this.setState(prevState => {
                 return {
@@ -165,7 +166,6 @@ class Journal extends React.Component {
     }
 
     getEntry(id) {
-        let url = "http://localhost:10100/journal/";
         axios.get(url+id).then(response => {
             this.setState(prevState => {
                 return {
@@ -178,6 +178,24 @@ class Journal extends React.Component {
             console.log(err);
         })
     }
+
+    ///////////////////////
+    /// ENTRIES METHODS \\\
+    ///////////////////////
+    getEntries(pathname) {
+        let url = "http://localhost:10100";
+        axios.get(url+pathname).then(response => {
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    entries: response.data
+                }
+            });
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
 
     //////////////////////////
     /// LIFE CYCLE METHODS \\\
@@ -202,11 +220,16 @@ class Journal extends React.Component {
                                         handleChange={this.handleChange}
                                         handleStart={this.handleStart}
                                         handleSave={this.handleSave}
-                                        handleDelete={this.handleDelete}
-                                        getpost={this.getEntry}{...props}/>
+                                        handleDelete={this.handleDelete}{...props}/>
                             )
                         }}/>
-                        <Route path="/journal/:year/:month/:day" component={EntriesContainer}/>
+                        <Route path="/journal/:year/:month/:day" render={props => {
+                            return (
+                                <EntriesContainer
+                                    getEntries={this.getEntries}
+                                    state={this.state.entries}{...props}/>
+                            )
+                        }}/>
                         <Route path="/journal/:id" render={props => {
                             return (
                                     <JournalContainer

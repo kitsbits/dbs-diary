@@ -7,52 +7,44 @@ const url = "http://localhost:10100";
 class EntriesContainer extends React.Component {
     constructor() {
         super();
-        this.state = {
-            entries: []
-        };
-        this.getEntries = this.getEntries.bind(this);
+        // this.state = {
+        //     entries: []
+        // };
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.location.pathname !== this.props.location.pathname) {
-            this.getEntries(nextProps.location.pathname);
+            this.props.getEntries(nextProps.location.pathname);
         }
     }
 
-    componentDidMount() {
-        this.getEntries(this.props.location.pathname);
-    }
-
-    getEntries(pathname) {
-        axios.get(url+pathname).then(response => {
-            this.setState({
-                entries: response.data
-            });
-        }).catch(err => {
-            console.log(err);
-        })
-    }
+    // componentDidMount() {
+    //     this.props.getEntries(this.props.location.pathname);
+    // }
 
     genEntries() {
-        return this.state.entries.map((entry, i) => {
+        return this.props.state.map((entry, i) => {
             return (
                 <Entry
                         key={entry._id}
                         entry={entry}
                         count={i + 1}
-                        getEntries={this.getEntries}
+                        getEntries={this.props.getEntries}
                         pathname={this.props.location.pathname}/>
             )
         });
     }
 
     render() {
+        this.props.getEntries(this.props.location.pathname);
+
         const containerStyles = {
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "space-around",
             width: "65%",
-            padding: "25px"
+            padding: "25px",
+            marginTop: "50px"
         }
 
         return (

@@ -39,13 +39,15 @@ function Entry(props) {
     }
 
     const detailsDivStyles = {
-        width: "250px"
+        width: "80%",
+        margin: "0 auto 0 auto"
     }
 
     const entryTextStyles = {
         overflow: "hidden",
-        marginTop: "25px",
-        fontSize: "1.25em"
+        fontSize: "1.25em",
+        width: "90%",
+        margin: "0 auto 0 auto"
     }
 
     const buttonContainerStyles = {
@@ -70,7 +72,7 @@ function Entry(props) {
         <div style={containerStyles}>
             <h1 style={countStyles}>{props.count}</h1>
             <div style={detailsDivStyles}>
-                <h1>{props.entry.title}</h1>
+                <h2>{props.entry.title}</h2>
                 <p>@ {date}</p>
             </div>
             <p style={entryTextStyles}>{props.entry.text}</p>
