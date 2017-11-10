@@ -17,7 +17,6 @@ function Entry(props) {
         flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
-        flexWrap: "wrap",
         overflow: "hidden",
         width: "350px",
         height: "350px",
@@ -47,7 +46,9 @@ function Entry(props) {
         overflow: "hidden",
         fontSize: "1.25em",
         width: "90%",
-        margin: "0 auto 0 auto"
+        margin: "0 auto 0 auto",
+        height: "50px",
+        overflow: "hidden"
     }
 
     const buttonContainerStyles = {
