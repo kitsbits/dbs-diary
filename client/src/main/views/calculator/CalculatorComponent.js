@@ -1,14 +1,20 @@
 import React from "react";
 
 export default function CalculatorComponent(props) {
+    const containerStyles = {
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center"
+    }
+
     const calcStyles = {
         display: "flex",
         flexWrap: "wrap",
         padding: "25px 0 25px 0",
         width: "300px",
-        margin: "auto",
         border: "2px solid green",
-        marginTop: "55px"
+        marginTop: "55px",
+        marginRight: "75px"
     }
 
     const outputStyles = {
@@ -41,33 +47,43 @@ export default function CalculatorComponent(props) {
         outline: "none"
     }
 
+    const tabulationStyles = {
+        width: "250px",
+        fontSize: "2em",
+        color: "orange",
+        marginTop: "25px"
+    }
+
     return (
-        <div style={calcStyles}>
-            <p id="output" style={outputStyles}></p>
-            <div style={rowStyles}>
-                <input onClick={props.concat} type="button" name="" value="7" style={buttonStyles}/>
-                <input onClick={props.concat} type="button" name="" value="8" style={buttonStyles}/>
-                <input onClick={props.concat} type="button" name="" value="9" style={buttonStyles}/>
-                <input onClick={props.concat} type="button" name="" value="/" style={buttonStyles}/>
+        <div style={containerStyles}>
+            <div style={calcStyles}>
+                <p id="output" style={outputStyles}></p>
+                <div style={rowStyles}>
+                    <input onClick={props.concat} type="button" name="" value="7" style={buttonStyles}/>
+                    <input onClick={props.concat} type="button" name="" value="8" style={buttonStyles}/>
+                    <input onClick={props.concat} type="button" name="" value="9" style={buttonStyles}/>
+                    <input onClick={props.concat} type="button" name="" value="/" style={buttonStyles}/>
+                </div>
+                <div style={rowStyles}>
+                    <input onClick={props.concat} type="button" name="" value="4" style={buttonStyles}/>
+                    <input onClick={props.concat} type="button" name="" value="5" style={buttonStyles}/>
+                    <input onClick={props.concat} type="button" name="" value="6" style={buttonStyles}/>
+                    <input onClick={props.concat} type="button" name="" value="*" style={buttonStyles}/>
+                </div>
+                <div style={rowStyles}>
+                    <input onClick={props.concat} type="button" name="" value="1" style={buttonStyles}/>
+                    <input onClick={props.concat} type="button" name="" value="2" style={buttonStyles}/>
+                    <input onClick={props.concat} type="button" name="" value="3" style={buttonStyles}/>
+                    <input onClick={props.concat} type="button" name="" value="-" style={buttonStyles}/>
+                </div>
+                <div style={rowStyles}>
+                    <input onClick={props.concat} type="button" name="" value="0" style={buttonStyles}/>
+                    <input onClick={props.concat} type="button" name="" value="." style={buttonStyles}/>
+                    <input onClick={props.evaluate} type="button" name="" value="=" style={buttonStyles}/>
+                    <input onClick={props.concat} type="button" name="" value="+" style={buttonStyles}/>
+                </div>
             </div>
-            <div style={rowStyles}>
-                <input onClick={props.concat} type="button" name="" value="4" style={buttonStyles}/>
-                <input onClick={props.concat} type="button" name="" value="5" style={buttonStyles}/>
-                <input onClick={props.concat} type="button" name="" value="6" style={buttonStyles}/>
-                <input onClick={props.concat} type="button" name="" value="*" style={buttonStyles}/>
-            </div>
-            <div style={rowStyles}>
-                <input onClick={props.concat} type="button" name="" value="1" style={buttonStyles}/>
-                <input onClick={props.concat} type="button" name="" value="2" style={buttonStyles}/>
-                <input onClick={props.concat} type="button" name="" value="3" style={buttonStyles}/>
-                <input onClick={props.concat} type="button" name="" value="-" style={buttonStyles}/>
-            </div>
-            <div style={rowStyles}>
-                <input onClick={props.concat} type="button" name="" value="0" style={buttonStyles}/>
-                <input onClick={props.concat} type="button" name="" value="." style={buttonStyles}/>
-                <input onClick={props.evaluate} type="button" name="" value="=" style={buttonStyles}/>
-                <input onClick={props.concat} type="button" name="" value="+" style={buttonStyles}/>
-            </div>
+            <div id="tabulation" style={tabulationStyles}></div>
         </div>
     )
 }

@@ -15,7 +15,8 @@ class Calculator extends React.Component {
 
     evaluateOutput(e) {
         let total = document.getElementById("output").innerHTML;
-        document.getElementById("output").innerHTML = eval(total);
+        document.getElementById("tabulation").innerHTML += `<p>${eval(total)}</p>`;
+        document.getElementById("output").innerHTML = "";
     }
 
     render() {
