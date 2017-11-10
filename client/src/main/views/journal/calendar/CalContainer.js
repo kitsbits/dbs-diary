@@ -1,5 +1,6 @@
 import React from "react";
-import Day from "./Day"
+import Day from "./Day";
+import Month from "./Month";
 import moment from "moment";
 
 export default function CalContainer(props) {
@@ -34,10 +35,6 @@ export default function CalContainer(props) {
         marginTop: "55px"
     }
 
-    const monthNames = {
-        margin: "10px"
-    }
-
     const currentMonth = moment([props.state.year, props.state.month, props.state.day]).format('MMMM');
     return (
         <div>
@@ -63,12 +60,13 @@ export default function CalContainer(props) {
                 })}
             </div>
             <div style={monthContainerStyles}>
-                {props.state.monthsInYear.map((month, i) => {
+                {props.state.thisYearsMonths.map((month, i) => {
                     return (
-                        <h2 onClick={(e) => {
-                            props.changeMonth(i);
-                            props.getMonthsPosts();
-                        }} style={monthNames} key={i}>{month.toUpperCase()}</h2>
+                        <Month
+                            key={month.month + i}
+                            month={month}
+                            index={i}
+                            year={props.state.year}/>
                     )
                 })}
             </div>

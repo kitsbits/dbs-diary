@@ -20,7 +20,6 @@ class JournalContainer extends React.Component {
     }
 
     render() {
-        console.log(this.props.input)
         return (
             <JournalComponent
                 input={this.props.input}

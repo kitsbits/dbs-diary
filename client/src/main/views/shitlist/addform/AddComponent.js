@@ -47,7 +47,7 @@ export default function AddComponent(props) {
         <div style={containerStyles}>
             <h1 style={{color: "red"}}>ADD SHIT</h1>
             <form onSubmit={props.handleSubmit} style={formStyles}>
-                <input onChange={props.handleChange} type="text" name="name" value={props.input.name} placeholder="Shit's name" style={inputStyles} class="add-input"/>
+                <input onChange={props.handleChange} type="text" name="name" value={props.input.name} placeholder="Shit's name" style={inputStyles} className="add-input"/>
                 <input onChange={props.handleChange} type="text" name="location" value={props.input.location} placeholder="Location: City, in the elevator, etc." style={inputStyles} class="add-input"/>
                 <textarea onChange={props.handleChange} name="details" value={props.input.details} placeholder="Give us all the shitty details" style={textAreaStyles} class="add-input"></textarea>
                 <button type="submit" style={buttonStyles}>ADD SHIT</button>

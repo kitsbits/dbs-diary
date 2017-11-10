@@ -28,6 +28,7 @@ class Journal extends React.Component {
         this.state = {
             calendar: {
                 thisMonthsDays: [],
+                thisYearsMonths: [],
                 month: now.getMonth(),
                 year: now.getFullYear(),
                 day: now.getDate(),
@@ -110,6 +111,58 @@ class Journal extends React.Component {
                 }
             });
             this.genThisMonthCalendar();
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    genThisYearCalendar() {
+        const monthsWithPosts = Array.from(new Set(this.state.calendar.monthsPosts.map(month => {
+            return new Date(month.createdAt).getMonth();
+        })));
+        const monthsArray = [];
+        for (let i = 0; i < 12; i++) {
+            if (monthsWithPosts.includes(i)) {
+                monthsArray.push({
+                    month: this.state.calendar.monthsInYear[i].toUpperCase(),
+                    color: "yellow",
+                    post: true
+                });
+            } else {
+                monthsArray.push({
+                    month: this.state.calendar.monthsInYear[i].toUpperCase(),
+                    color: "white",
+                    post: false
+                });
+            }
+        }
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                calendar: {
+                    ...prevState.calendar,
+                    thisYearsMonths: monthsArray
+                }
+            }
+        });
+    }
+
+    getYearsPosts() {
+        axios.get(url, {
+            params: {
+                year: this.state.calendar.year
+            }
+        }).then(response => {
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    calendar: {
+                        ...prevState.calendar,
+                        yearsPosts: response.data
+                    }
+                };
+            });
+            this.genThisYearCalendar();
         }).catch(err => {
             console.log(err);
         });
@@ -229,6 +282,8 @@ class Journal extends React.Component {
 
     componentDidMount() {
         this.getMonthsPosts();
+        this.getYearsPosts();
+
     }
 
     //////////////
@@ -252,6 +307,13 @@ class Journal extends React.Component {
                             )
                         }}/>
                         <Route path="/journal/:year/:month/:day" render={props => {
+                            return (
+                                <EntriesContainer
+                                    getEntries={this.getEntries}
+                                    state={this.state.entries}{...props}/>
+                            )
+                        }}/>
+                        <Route path="/journal/:year/:month" render={props => {
                             return (
                                 <EntriesContainer
                                     getEntries={this.getEntries}
