@@ -1,8 +1,8 @@
 import React from "react";
-import axios from "axios";
 import JournalComponent from "./JournalComponent";
 
 class JournalContainer extends React.Component {
+
     constructor() {
         super();
     }
@@ -12,7 +12,15 @@ class JournalContainer extends React.Component {
             this.props.getEntry(this.props.match.params.id);
         }
     }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location.pathname !== this.props.location.pathname) {
+            this.props.clearJournal();
+        }
+    }
+
     render() {
+        console.log(this.props.input)
         return (
             <JournalComponent
                 input={this.props.input}

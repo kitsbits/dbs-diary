@@ -1,6 +1,6 @@
  // ACTIONS \\
 import {getList, addShit, deleteShit, editShit} from "./shitlist";
-import {saveEntry, startEntry, deleteEntry} from "./journal";
+import {saveEntry, startEntry, deleteEntry, getEntries} from "./journal";
 
 export {
     getList,
@@ -9,5 +9,6 @@ export {
     editShit,
     saveEntry,
     startEntry,
-    deleteEntry
+    deleteEntry,
+    getEntries
 }

@@ -21,3 +21,26 @@ export function startEntry(entry) {
         });
     }
 }
+
+export function deleteEntry(id) {
+    return (dispatch) => {
+        axios.delete(url + id).then(response => {
+            dispatch({type: "DELETE_ENTRY", id});
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+}
+
+export function getEntries(url, pathname) {
+    return (dispatch) => {
+        axios.get(url+pathname).then(response => {
+            dispatch({
+                type: "GET_ENTRIES",
+                entries: response.data
+            })
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+}

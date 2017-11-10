@@ -1,13 +1,10 @@
 import React from "react";
-import axios from "axios";
 import Entry from "./Entry";
 
-const url = "http://localhost:10100";
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
 class EntriesContainer extends React.Component {
-    constructor() {
-        super();
-    }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.location.pathname !== this.props.location.pathname) {
@@ -15,12 +12,12 @@ class EntriesContainer extends React.Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.getEntries(this.props.location.pathname);
     }
 
     genEntries() {
-        return this.props.state.map((entry, i) => {
+        return this.props.entries.map((entry, i) => {
             return (
                 <Entry
                         key={entry._id}
@@ -42,11 +39,17 @@ class EntriesContainer extends React.Component {
             padding: "25px",
             marginTop: "50px"
         }
-
+        const entries = this.genEntries();
         return (
-            <div style={containerStyles}>{this.genEntries()}</div>
+            entries.length >= 0 ?
+                <div style={containerStyles}>{entries}</div> :
+                <Redirect to="/journal"/>
         )
     }
 }
 
-export default EntriesContainer;
+function mapStateToProps(state) {
+    return state
+}
+
+export default connect(mapStateToProps, null)(EntriesContainer);

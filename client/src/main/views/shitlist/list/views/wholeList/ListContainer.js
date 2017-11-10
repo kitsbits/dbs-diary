@@ -5,9 +5,6 @@ import {connect} from "react-redux";
 import {getList} from "../../../../../../redux/actions/index.js";
 
 class ListContainer extends React.Component {
-    constructor() {
-        super();
-    }
 
     componentDidMount() {
         this.props.getList()

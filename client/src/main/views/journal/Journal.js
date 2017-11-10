@@ -3,14 +3,14 @@ import JournalContainer from "./journal/JournalContainer";
 import CalContainer from "./calendar/CalContainer";
 import EntriesContainer from "./entries/EntriesContainer";
 import Navbar from "../../Navbar";
-import {saveEntry, startEntry, deleteEntry} from "../../../redux/actions";
+import {saveEntry, startEntry, deleteEntry, getEntries} from "../../../redux/actions";
 
 import {Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
 import moment from "moment";
 import axios from "axios";
 
-import * as api from "../../../api";
+// import * as api from "../../../api";
 
 const url = "http://localhost:10100/journal/";
 const now = new Date();
@@ -36,14 +36,15 @@ class Journal extends React.Component {
                 daysPosts: []
             },
             journal: {},
-            entries: []
+            entries: props.entries
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleStart = this.handleStart.bind(this);
         this.handleSave = this.handleSave.bind(this);
-        this.handleCancel = this.handleCancel.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
         this.getEntry = this.getEntry.bind(this);
         this.getEntries = this.getEntries.bind(this);
+        this.clearJournal = this.clearJournal.bind(this);
     }
     ////////////////////////
     /// CALENDAR METHODS \\\
@@ -149,21 +150,20 @@ class Journal extends React.Component {
         this.getMonthsPosts();
     }
 
-    handleCancel(event) {
+    handleDelete(event) {
         if (window.confirm("Are you sure you want to delete this entry?") === true) {
-            api.deleteEntry(this.state.journal._id).then(response => {
-                this.setState(prevState => {
-                    return {
-                        ...prevState,
-                        journal: {
-                            ...prevState.journal,
-                            title: "",
-                            text: ""
-                        }
+            this.props.deleteEntry(this.state.journal._id);
+            // api.deleteEntry(ID OF ENTRY).then(...)
+
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    journal: {
+                        ...prevState.journal,
+                        title: "",
+                        text: ""
                     }
-                });
-            }).catch(err => {
-                console.log(err);
+                }
             });
             document.getElementById("entry-form").disabled = true;
             document.getElementById("save-button").disabled = true;
@@ -184,27 +184,34 @@ class Journal extends React.Component {
         })
     }
 
+    clearJournal() {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                journal: {}
+            }
+        });
+    }
+
     ///////////////////////
     /// ENTRIES METHODS \\\
     ///////////////////////
     getEntries(pathname) {
         let url = "http://localhost:10100";
-        axios.get(url+pathname).then(response => {
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    entries: response.data
-                }
-            });
-        }).catch(err => {
-            console.log(err);
-        })
+        this.props.getEntries(url, pathname);
+
     }
 
 
     //////////////////////////
     /// LIFE CYCLE METHODS \\\
     //////////////////////////
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location.pathname !== this.props.location.pathname) {
+            this.getMonthsPosts();
+        }
+    }
+
     componentDidMount() {
         this.getMonthsPosts();
     }
@@ -225,7 +232,8 @@ class Journal extends React.Component {
                                         handleChange={this.handleChange}
                                         handleStart={this.handleStart}
                                         handleSave={this.handleSave}
-                                        handleCancel={this.handleCancel}{...props}/>
+                                        handleDelete={this.handleDelete}
+                                        clearJournal={this.clearJournal}{...props}/>
                             )
                         }}/>
                         <Route path="/journal/:year/:month/:day" render={props => {
@@ -242,8 +250,9 @@ class Journal extends React.Component {
                                         handleChange={this.handleChange}
                                         handleStart={this.handleStart}
                                         handleSave={this.handleSave}
-                                        handleCancel={this.handleCancel}
-                                        getEntry={this.getEntry}{...props}/>
+                                        handleDelete={this.handleDelete}
+                                        getEntry={this.getEntry}
+                                        clearJournal={this.clearJournal}{...props}/>
                             )
                         }}/>
                     </Switch>
@@ -259,4 +268,4 @@ function mapStateToProps(state) {
     return state;
 }
 
-export default connect(mapStateToProps, {saveEntry, startEntry, deleteEntry})(Journal);
+export default connect(mapStateToProps, {saveEntry, startEntry, deleteEntry, getEntries})(Journal);

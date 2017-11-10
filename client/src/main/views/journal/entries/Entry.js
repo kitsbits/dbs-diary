@@ -1,6 +1,8 @@
 import React from "react";
 import moment from "moment";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {deleteEntry} from "../../../../redux/actions";
 
 function Entry(props) {
     const date = moment(props.entry.createdAt).format('h:mm:ss a');
@@ -76,10 +78,13 @@ function Entry(props) {
             <p style={entryTextStyles}>{props.entry.text}</p>
             <div style={buttonContainerStyles}>
                 <Link to={`/journal/${props.entry._id}`} style={linkStyles}><button type="button" style={buttonStyles}>EDIT</button></Link>
-                <button type="button" style={buttonStyles}>DELETE</button>
+                <button onClick={(e) => {
+                    props.deleteEntry(props.entry._id);
+                }}
+                    type="button" style={buttonStyles}>DELETE</button>
             </div>
         </div>
     )
 }
 
-export default Entry;
+export default connect(null, {deleteEntry})(Entry);
