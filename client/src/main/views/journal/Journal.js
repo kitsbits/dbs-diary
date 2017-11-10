@@ -31,6 +31,7 @@ class Journal extends React.Component {
                 month: now.getMonth(),
                 year: now.getFullYear(),
                 day: now.getDate(),
+                monthsInYear: moment.monthsShort(),
                 monthsPosts: [],
                 yearsPosts: [],
                 daysPosts: []
@@ -45,6 +46,8 @@ class Journal extends React.Component {
         this.getEntry = this.getEntry.bind(this);
         this.getEntries = this.getEntries.bind(this);
         this.clearJournal = this.clearJournal.bind(this);
+        this.changeMonthCalendarView = this.changeMonthCalendarView.bind(this);
+        this.getMonthsPosts = this.getMonthsPosts.bind(this);
     }
     ////////////////////////
     /// CALENDAR METHODS \\\
@@ -110,6 +113,18 @@ class Journal extends React.Component {
         }).catch(err => {
             console.log(err);
         });
+    }
+
+    changeMonthCalendarView(newMonth) {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                calendar: {
+                    ...prevState.calendar,
+                    month: newMonth
+                }
+            }
+        })
     }
 
     ///////////////////////
@@ -257,7 +272,9 @@ class Journal extends React.Component {
                         }}/>
                     </Switch>
                     <CalContainer
-                        state={this.state.calendar}/>
+                        state={this.state.calendar}
+                        changeMonth={this.changeMonthCalendarView}
+                        getPosts={this.getMonthsPosts}/>
                 </div>
             </div>
         )
