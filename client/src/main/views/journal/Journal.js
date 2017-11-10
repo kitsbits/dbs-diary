@@ -117,9 +117,11 @@ class Journal extends React.Component {
     }
 
     genThisYearCalendar() {
-        const monthsWithPosts = Array.from(new Set(this.state.calendar.monthsPosts.map(month => {
+        const monthsWithPosts = Array.from(new Set(this.state.calendar.yearsPosts.map(month => {
+            console.log(month);
             return new Date(month.createdAt).getMonth();
         })));
+        console.log(monthsWithPosts);
         const monthsArray = [];
         for (let i = 0; i < 12; i++) {
             if (monthsWithPosts.includes(i)) {

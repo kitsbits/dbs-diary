@@ -5,7 +5,8 @@ import {connect} from "react-redux";
 import {deleteEntry} from "../../../../redux/actions";
 
 function Entry(props) {
-    const date = moment(props.entry.createdAt).format('h:mm:ss a');
+    const time = moment(props.entry.createdAt).format('h:mm:ss a');
+    const date = moment(props.entry.createdAt).format('MMM Do YY');
 
     const linkStyles = {
         textDecoration: "none",
@@ -74,7 +75,8 @@ function Entry(props) {
             <h1 style={countStyles}>{props.count}</h1>
             <div style={detailsDivStyles}>
                 <h2>{props.entry.title}</h2>
-                <p>@ {date}</p>
+                <p>{date}</p>
+                <p>@ {time}</p>
             </div>
             <p style={entryTextStyles}>{props.entry.text}</p>
             <div style={buttonContainerStyles}>
