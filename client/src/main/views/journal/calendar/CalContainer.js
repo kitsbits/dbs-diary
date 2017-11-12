@@ -38,7 +38,7 @@ export default function CalContainer(props) {
     const currentMonth = moment([props.state.year, props.state.month, props.state.day]).format('MMMM');
     return (
         <div>
-            <h1 style={headerStyles}>{currentMonth.toUpperCase()} :</h1>
+            <h1 style={headerStyles}>{currentMonth.toUpperCase()}:</h1>
             <h3 style={dayHeaderContainerStyles}>
                 <p>M</p>
                 <p>T</p>
