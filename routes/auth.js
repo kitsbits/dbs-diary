@@ -7,7 +7,14 @@ const settings = require("../settings");
 const User = require("../models/user");
 const authRouter = express.Router();
 
+// use passport to create a strategy
 passport.use(new Strategy((usernameAttempt, passwordAttempt, done) => {
+    // attempt to find usernameAttempt in database
+        // handle error, return false
+        // if currentUser null, return false
+        // else usernameAttempt good, check passwordAttempt
+            // (write method on User constructor to check passwordAttempt)
+            // check .auth method on currentUser and return done callback to handle return from .auth cb
     User.findOne({username: usernameAttempt}, (err, currentUser) => {
         if (err) {
             done(err, false);
@@ -15,53 +22,69 @@ passport.use(new Strategy((usernameAttempt, passwordAttempt, done) => {
             done(null, false);
         } else {
             currentUser.auth(passwordAttempt, isCorrect => {
-                done(null, isCorrect)
+                done(null, isCorrect);
             });
         }
     });
 }));
 
+// initialize passport Strategy
 authRouter.use(passport.initialize());
 
+// ROUTES \\
+// POST - signup
+    // find username in database
+        // handle error
+        // if existingUser NOT null, username already taken
+        // else - save newUser, return saved user and auth token (so user can login right away after signing up)
 authRouter.post("/signup", (req, res) => {
     User.findOne({username: req.body.username}, (err, existingUser) => {
         if (err) {
-            return res.status(500).send({
+            res.status(500).send({
                 success: false,
                 err
             });
         } else if (existingUser !== null) {
-            return res.status(404).send({
+            res.status(500).send({
                 success: false,
-                err: "Sorry, that username already exists!"
+                err: "Sorry, this username is already taken."
             });
         } else {
-            let newUser = new User(req.body);
+            const newUser = new User(req.body);
             newUser.save((err, savedUser) => {
-                if (err) return res.status(500).send({
-                    success: false,
-                    err
-                });
-                return res.status(201).send({
-                    success: true,
-                    savedUser
-                });
+                if (err) {
+                    res.status(500).send({
+                        success: false,
+                        err
+                    });
+                } else {
+                    res.status(201).send({
+                        success: true,
+                        savedUser
+                    });
+                }
             });
         }
     });
-});
+})
 
+
+// POST - login
+    // find username in database -- need passport authenticate
+    // handle error
+        // if user is null, user does not exist in DB
+        // else send back user without password and auth token
 authRouter.post("/login", passport.authenticate("local", {session: false}), (req, res) => {
     User.findOne({username: req.body.username}, (err, user) => {
         if (err) {
-            return res.status(500).send({
+            res.status(500).send({
                 success: false,
                 err
             });
         } else if (user === null) {
-            return res.status(404).send({
+            res.status(404).send({
                 success: false,
-                err: "Sorry, that username does not exist."
+                err: "Sorry, this username was not found."
             });
         } else {
             res.status(201).send({
@@ -74,5 +97,3 @@ authRouter.post("/login", passport.authenticate("local", {session: false}), (req
         }
     });
 });
-
-module.exports = authRouter;

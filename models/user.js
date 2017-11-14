@@ -20,11 +20,13 @@ const userSchema = new Schema({
     }
 });
 
+// pre save hook to hash password (don't forget next!)
 userSchema.pre("save", function(next) {
     this.password = bcrypt.hashSync(this.password, salt);
     next();
 });
 
+// .auth method to compare this.passowrd to passwordAttempt
 userSchema.methods.auth = function(passwordAttempt, cb) {
     bcrypt.compare(passwordAttempt, this.password, (err, isMatch) => {
         if (err) {
@@ -36,6 +38,7 @@ userSchema.methods.auth = function(passwordAttempt, cb) {
     });
 }
 
+// .withoutpassword method that deletes password from object sent back to server
 userSchema.methods.withoutPassword = function() {
     const user = this.toObject();
     delete user.password;
