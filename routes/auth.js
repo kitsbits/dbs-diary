@@ -97,3 +97,5 @@ authRouter.post("/login", passport.authenticate("local", {session: false}), (req
         }
     });
 });
+
+module.exports = authRouter;

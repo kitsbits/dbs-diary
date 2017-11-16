@@ -1,37 +1,22 @@
 const express = require("express");
-const journalRoutes = express.Router();
 const JournalEntry = require("../models/journalEntry");
+const expressJwt = require("express-jwt");
+const settings = require("../settings");
+
+const journalRoutes = express.Router();
+
+journalRoutes.use(expressJwt({secret: settings.secret}));
 
 journalRoutes.get("/", (req, res) => {
-    let query = JournalEntry.find();
-    if (req.query.day) {
-        const nextDay = (Number(req.query.day) + 1).toString();
-        query
-        .where("createdAt")
-        .gte(new Date(req.query.year, req.query.month, req.query.day))
-        .lt(new Date(req.query.year, req.query.month, nextDay))
-    } else if (req.query.month) {
-        const nextMonth = (Number(req.query.month) + 1).toString();
-        query
-        .where("createdAt")
-        .gte(new Date(req.query.year, req.query.month))
-        .lt(new Date(req.query.year, nextMonth))
-    } else if (req.query.year) {
-        const nextYear = (Number(req.query.year) + 1).toString();
-        query
-        .where("createdAt")
-        .gte(new Date(req.query.year))
-        .lt(new Date(nextYear))
-    }
-
-    query.exec((err, entries) => {
-        if (err) return res.status(500).send(err);
-        return res.send(entries);
-    })
+    JournalEntry.find({user: req.user._id})
+        .exec((err, entries) => {
+            if (err) return res.status(500).send(err);
+            return res.send(entries);
+        })
 });
 
 journalRoutes.get("/:year/:month/:day", (req, res) => {
-    const query = JournalEntry.find();
+    const query = JournalEntry.find({user: req.user._id});
     if (req.params.day) {
         const nextDay = (Number(req.params.day) + 1).toString();
         query
@@ -59,7 +44,7 @@ journalRoutes.get("/:year/:month/:day", (req, res) => {
 });
 
 journalRoutes.get("/:year/:month", (req, res) => {
-    const query = JournalEntry.find();
+    const query = JournalEntry.find({user: req.user._id});
     if (req.params.day) {
         const nextDay = (Number(req.params.day) + 1).toString();
         query
@@ -87,29 +72,30 @@ journalRoutes.get("/:year/:month", (req, res) => {
 });
 
 journalRoutes.get("/:id", (req, res) => {
-    JournalEntry.findById(req.params.id, (err, entry) => {
+    JournalEntry.findOne({_id: req.params.id, user: req.user._id}, (err, entry) => {
         if (err) return res.status(500).send(err);
         return res.send(entry);
     });
 });
 
 journalRoutes.post("/", (req, res) => {
-    const NewEntry = new JournalEntry(req.body);
-    NewEntry.save((err, addedEntry) => {
+    const newEntry = new JournalEntry(req.body);
+    newEntry.user = req.user._id;
+    newEntry.save((err, addedEntry) => {
         if (err) return res.status(500).send(err);
         return res.send(addedEntry);
     });
 });
 
 journalRoutes.delete("/:id", (req, res) => {
-    JournalEntry.findByIdAndRemove(req.params.id, (err, deletedEntry) => {
+    JournalEntry.findOneAndRemove({_id: req.params.id, user: req.user._id}, (err, deletedEntry) => {
         if (err) return res.status(500).send(err);
         return res.send({Message: "This journal entry has been deleted!"});
     });
 });
 
 journalRoutes.put("/:id", (req, res) => {
-    JournalEntry.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, editedEntry) => {
+    JournalEntry.findOneAndUpdate({_id: req.params.id, user: req.user._id}, req.body, {new: true}, (err, editedEntry) => {
         if (err) return res.status(500).send(err);
         return res.send(editedEntry);
     });
