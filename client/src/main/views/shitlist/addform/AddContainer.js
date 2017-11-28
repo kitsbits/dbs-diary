@@ -1,7 +1,7 @@
 import React from "react";
 import AddComponent from "./AddComponent";
 import { connect } from "react-redux";
-import { addShit } from "../actions/shitlist.js";
+import { addShit } from "../redux/shitlist.js";
 
 class AddContainer extends React.Component {
     constructor() {

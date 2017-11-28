@@ -3,10 +3,10 @@ import JournalContainer from "./journal/JournalContainer";
 import CalContainer from "./calendar/CalContainer";
 import EntriesContainer from "./entries/EntriesContainer";
 import Navbar from "../../Navbar";
-import {saveEntry, startEntry, deleteEntry, getEntries} from "../../../redux/actions";
+import { saveEntry, startEntry, deleteEntry, getEntries } from "./redux/journal.js";
 
-import {Switch, Route} from "react-router-dom";
-import {connect} from "react-redux";
+import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 import moment from "moment";
 import axios from "axios";
 

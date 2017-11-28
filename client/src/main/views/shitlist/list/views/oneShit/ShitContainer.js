@@ -1,7 +1,7 @@
 import React from "react";
 import ShitComponent from "./ShitComponent";
 import { connect } from "react-redux";
-import { editShit, deleteShit } from "../../../actions/shitlist.js";
+import { editShit, deleteShit } from "../../../redux/shitlist.js";
 import axios from "axios";
 
 class ShitContainer extends React.Component {

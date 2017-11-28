@@ -1,8 +1,8 @@
 import React from "react";
 import moment from "moment";
-import {Link} from "react-router-dom";
-import {connect} from "react-redux";
-import {deleteEntry} from "../../../../redux/actions";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { deleteEntry } from "../redux/journal.js";
 
 function Entry(props) {
     const time = moment(props.entry.createdAt).format('h:mm:ss a');

@@ -2,16 +2,16 @@ import React from "react";
 import AddContainer from "../../../addform/AddContainer";
 import ListComponent from "./ListComponent";
 import { connect } from "react-redux";
-import { getList } from "../../../actions/shitlist.js";
+import { getList } from "../../../redux/shitlist.js";
 
 class ListContainer extends React.Component {
 
-    componentDidMount() {
-        this.props.getList()
-    }
+    // componentDidMount() {
+    //     this.props.getList()
+    // }
 
     genList() {
-        return this.props.shitList.map(shit => {
+        return this.props.list.shitList.map(shit => {
             const itemContainerStyles = {
                 marginTop: "35px"
             }
@@ -48,7 +48,7 @@ class ListContainer extends React.Component {
             <div style={containerStyles}>
                 <AddContainer/>
                 <div style={listContainerStyles}>
-                    {this.genList()}
+                    {/* {this.genList()} */}
                 </div>
             </div>
         )

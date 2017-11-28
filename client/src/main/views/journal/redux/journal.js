@@ -1,5 +1,5 @@
+// ACTIONS \\
 import axios from "axios";
-
 const url = "http://localhost:10100/journal/";
 
 export function saveEntry(id, entry) {
@@ -43,4 +43,34 @@ export function getEntries(url, pathname) {
             console.log(err);
         })
     }
+}
+
+// STATE \\
+const state = {
+   entries: []
+}
+
+
+// REDUCER ||
+export default function journal(prevState = state, action) {
+   let newEntries = [...prevState.entries];
+   switch(action.type) {
+        case "SAVE_ENTRY":
+            return {
+                ...prevState,
+                journalEntry: action.savedEntry
+            };
+        case "DELETE_ENTRY":
+            return {
+                ...prevState,
+                entries: newEntries.filter(entry => entry._id !== action.id)
+            };
+        case "GET_ENTRIES":
+            return {
+                ...prevState,
+                entries: action.entries
+            };
+       default:
+           return prevState;
+   }
 }
