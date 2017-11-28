@@ -1,8 +1,8 @@
 import React from "react";
 import AddContainer from "../../../addform/AddContainer";
 import ListComponent from "./ListComponent";
-import {connect} from "react-redux";
-import {getList} from "../../../../../../redux/actions/index.js";
+import { connect } from "react-redux";
+import { getList } from "../../../actions/shitlist.js";
 
 class ListContainer extends React.Component {
 

@@ -1,5 +1,5 @@
 import React from "react";
-import {Switch, Route} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import ShitContainer from "./views/oneShit/ShitContainer";
 import ListContainer from "./views/wholeList/ListContainer";
 import Navbar from "../../../Navbar";

@@ -1,5 +1,5 @@
 import React from "react";
-import {Switch, Route} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import Calculator from "./views/calculator/Calculator";
 import Journal from "./views/journal/Journal";
