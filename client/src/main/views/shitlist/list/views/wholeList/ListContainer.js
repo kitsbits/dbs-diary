@@ -6,9 +6,9 @@ import { getList } from "../../../redux/shitlist.js";
 
 class ListContainer extends React.Component {
 
-    // componentDidMount() {
-    //     this.props.getList()
-    // }
+    componentDidMount() {
+        this.props.getList()
+    }
 
     genList() {
         return this.props.list.shitList.map(shit => {
@@ -48,7 +48,7 @@ class ListContainer extends React.Component {
             <div style={containerStyles}>
                 <AddContainer/>
                 <div style={listContainerStyles}>
-                    {/* {this.genList()} */}
+                    {this.genList()}
                 </div>
             </div>
         )

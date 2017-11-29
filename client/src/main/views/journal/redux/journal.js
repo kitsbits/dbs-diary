@@ -2,6 +2,13 @@
 import axios from "axios";
 const url = "http://localhost:10100/journal/";
 
+// include token in axios requests
+axios.interceptors.request.use(config => {
+    const token = localStorage.getItem("token");
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+});
+
 export function saveEntry(id, entry) {
     return (dispatch) => {
         axios.put(url + id, entry).then(response => {

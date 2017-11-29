@@ -51,7 +51,7 @@ authRouter.post("/signup", (req, res) => {
             });
         } else {
             const newUser = new User(req.body);
-            newUser.save((err, savedUser) => {
+            newUser.save((err, user) => {
                 if (err) {
                     res.status(500).send({
                         success: false,
@@ -60,7 +60,10 @@ authRouter.post("/signup", (req, res) => {
                 } else {
                     res.status(201).send({
                         success: true,
-                        savedUser
+                        user: user.withoutPassword(),
+                        token: jwt.sign(user.withoutPassword(), settings.secret, {
+                            expiresIn: 60 * 30 * 24
+                        })
                     });
                 }
             });

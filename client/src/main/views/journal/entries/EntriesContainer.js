@@ -17,7 +17,7 @@ class EntriesContainer extends React.Component {
     }
 
     genEntries() {
-        return this.props.entries.map((entry, i) => {
+        return this.props.journal.entries.map((entry, i) => {
             return (
                 <Entry
                         key={entry._id}
@@ -30,7 +30,6 @@ class EntriesContainer extends React.Component {
     }
 
     render() {
-
         const containerStyles = {
             display: "flex",
             flexWrap: "wrap",

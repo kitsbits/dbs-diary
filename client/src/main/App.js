@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
+import ProtectedRoute from "./ProtectedRoutes";
 import Calculator from "./views/calculator/Calculator";
 import Journal from "./views/journal/Journal";
 import Landing from "./views/Landing";
@@ -12,16 +13,13 @@ export default function App() {
     return (
         <div>
             <Switch>
-                <Route exact path="/" component={Signup}/>
+                <Route path="/login" component={Signin}/>
+                <Route path="/signup" component={Signup}/>
+                <ProtectedRoute exact path="/" component={Landing}/>
+                <ProtectedRoute path="/calculator" component={Calculator}/>
+                <ProtectedRoute path="/journal" component={Journal}/>
+                <ProtectedRoute path="/shitlist" component={ListLanding}/>
             </Switch>
-            {/* <Signup></Signup>
-            <Signin></Signin> */}
-            {/* <Switch>
-                <Route exact path="/" component={Landing}/>
-                <Route path="/calculator" component={Calculator}/>
-                <Route path="/journal" component={Journal}/>
-                <Route path="/shitlist" component={ListLanding}/>
-            </Switch> */}
         </div>
     )
 }
