@@ -1,6 +1,7 @@
 import React from "react";
 import Day from "./Day";
 import Month from "./Month";
+import Year from "./Year";
 import moment from "moment";
 
 export default function CalContainer(props) {
@@ -32,7 +33,17 @@ export default function CalContainer(props) {
         display: "flex",
         flexWrap: "wrap",
         width: "245px",
-        marginTop: "55px"
+        marginTop: "35px",
+        padding: "25px 0",
+        borderTop: "1px solid white",
+        borderBottom: "1px solid white",
+    }
+
+    const yearContainerStyles = {
+        display: "flex",
+        flexWrap: "wrap",
+        width: "245px",
+        marginTop: "20px"
     }
 
     const currentMonth = moment([props.state.year, props.state.month, props.state.day]).format('MMMM');
@@ -67,6 +78,15 @@ export default function CalContainer(props) {
                             month={month}
                             index={i}
                             year={props.state.year}/>
+                    )
+                })}
+            </div>
+            <div style={yearContainerStyles}>
+                {props.state.allYears.map((year, i) => {
+                    return (
+                        <Year
+                            key={year + i}
+                            year={year}/>
                     )
                 })}
             </div>

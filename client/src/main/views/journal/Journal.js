@@ -29,6 +29,7 @@ class Journal extends React.Component {
             calendar: {
                 thisMonthsDays: [],
                 thisYearsMonths: [],
+                allYears: [now.getFullYear(), now.getFullYear() - 1, now.getFullYear() - 2],
                 month: now.getMonth(),
                 year: now.getFullYear(),
                 day: now.getDate(),
