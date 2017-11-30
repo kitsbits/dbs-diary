@@ -40,9 +40,10 @@ class EntriesContainer extends React.Component {
         }
         const entries = this.genEntries();
         return (
-            entries.length >= 0 ?
-                <div style={containerStyles}>{entries}</div> :
-                <Redirect to="/journal"/>
+            entries.length <= 0 ?
+                <Redirect to="/journal"/> :
+                <div style={containerStyles}>{entries}</div>
+
         )
     }
 }
