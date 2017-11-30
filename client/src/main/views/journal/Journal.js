@@ -67,7 +67,6 @@ class Journal extends React.Component {
                 daysArray.push("");
                 daysBeforeFirstCount++;
             } else {
-
                 if (daysWithPostsArray.includes(i - daysBeforeFirst + 1)) {
                     daysArray.push({
                         date: i - daysBeforeFirst,
@@ -216,6 +215,7 @@ class Journal extends React.Component {
         event.preventDefault();
         this.props.saveEntry(this.state.journal._id, this.state.journal);
         this.getMonthsPosts();
+        this.getYearsPosts();
     }
 
     handleDelete(event) {
@@ -267,7 +267,6 @@ class Journal extends React.Component {
     getEntries(pathname) {
         let url = "http://localhost:10100";
         this.props.getEntries(url, pathname);
-
     }
 
 
@@ -277,6 +276,7 @@ class Journal extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.location.pathname !== this.props.location.pathname) {
             this.getMonthsPosts();
+            this.getYearsPosts();
         }
     }
 
@@ -314,6 +314,13 @@ class Journal extends React.Component {
                             )
                         }}/>
                         <Route path="/journal/:year/:month" render={props => {
+                            return (
+                                <EntriesContainer
+                                    getEntries={this.getEntries}
+                                    state={this.state.entries}{...props}/>
+                            )
+                        }}/>
+                        <Route path="/journal/:year" render={props => {
                             return (
                                 <EntriesContainer
                                     getEntries={this.getEntries}
