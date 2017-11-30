@@ -51,10 +51,19 @@ class Signup extends React.Component {
     }
 
     render() {
+        const authErrCode = this.props.login.authErrCode.signup;
+        let errMsg = "";
+        if (authErrCode < 500 && authErrCode > 399) {
+            errMsg = "Sorry, this username is already taken! Please choose another."
+        } else if (authErrCode > 499) {
+            errMsg = "Server error!"
+        }
+
         return(
             <Component
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
+                errMsg={errMsg}
                 input={this.state.inputs}></Component>
         )
     }

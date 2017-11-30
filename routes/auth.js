@@ -45,7 +45,7 @@ authRouter.post("/signup", (req, res) => {
                 err
             });
         } else if (existingUser !== null) {
-            res.status(500).send({
+            res.status(400).send({
                 success: false,
                 err: "Sorry, this username is already taken."
             });

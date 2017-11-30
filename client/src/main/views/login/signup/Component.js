@@ -8,6 +8,7 @@ export default function signupComponent(props) {
             <input onChange={props.handleChange} type="text" name="username" placeholder="username"/>
             <input onChange={props.handleChange} type="password" name="password" placeholder="password"/>
             <button type="submit">SIGNUP</button>
+            <p style={{color: "red"}}>{props.errMsg}</p>
         </form>
     )
 }

@@ -49,10 +49,20 @@ class Signin extends React.Component {
     }
 
     render() {
+        console.log(this.props);
+        const authErrCode = this.props.login.authErrCode.signin;
+        let errMsg = "";
+        if (authErrCode < 500 && authErrCode > 399) {
+            errMsg = "Sorry, the username or password is incorrect. Please try again."
+        } else if (authErrCode > 499) {
+            errMsg = "Server error!"
+        }
+        console.log(authErrCode);
         return(
             <Component
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
+                errMsg={errMsg}
                 input={this.state.inputs}></Component>
         )
     }
