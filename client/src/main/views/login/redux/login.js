@@ -23,7 +23,6 @@ export function signup(credentials, history) {
     return dispatch => {
         axios.post(authUrl + "signup", credentials).then(response => {
             const {token, user, success} = response.data;
-            console.log(response.data);
             localStorage.setItem("token", token);
             dispatch(logon(success, user));
             history.push("/");
