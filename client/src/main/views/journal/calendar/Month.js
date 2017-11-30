@@ -11,7 +11,7 @@ export default function Month(props) {
 
     return (
         props.month.post ?
-        <Link to={`/journal/${props.year}/${props.index}`} style={monthNames}>{props.month.month}</Link> :
+        <Link to={`/journal/entries/${props.year}/${props.index}`} style={monthNames}>{props.month.month}</Link> :
         <h2 style={monthNames}>{props.month.month}</h2>
     )
 }

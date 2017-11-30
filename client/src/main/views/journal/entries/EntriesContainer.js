@@ -1,8 +1,8 @@
 import React from "react";
 import Entry from "./Entry";
 
-import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 class EntriesContainer extends React.Component {
 
@@ -40,9 +40,10 @@ class EntriesContainer extends React.Component {
         }
         const entries = this.genEntries();
         return (
-            entries.length <= 0 ?
-                <Redirect to="/journal"/> :
-                <div style={containerStyles}>{entries}</div>
+            // entries.length <= 0 ?
+            //     <Redirect to="/journal"/> :
+            //     <div style={containerStyles}>{entries}</div>
+            <div style={containerStyles}>{entries}</div>
 
         )
     }

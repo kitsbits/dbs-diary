@@ -15,7 +15,7 @@ journalRoutes.get("/", (req, res) => {
         })
 });
 
-journalRoutes.get("/:year/:month/:day", (req, res) => {
+journalRoutes.get("/entries/:year/:month/:day", (req, res) => {
     const query = JournalEntry.find({user: req.user._id});
     const nextDay = (Number(req.params.day) + 1).toString();
 
@@ -29,7 +29,7 @@ journalRoutes.get("/:year/:month/:day", (req, res) => {
     })
 });
 
-journalRoutes.get("/:year/:month", (req, res) => {
+journalRoutes.get("/entries/:year/:month", (req, res) => {
     const query = JournalEntry.find({user: req.user._id});
     const nextMonth = (Number(req.params.month) + 1).toString();
 
@@ -44,7 +44,7 @@ journalRoutes.get("/:year/:month", (req, res) => {
     })
 });
 
-journalRoutes.get("/:year", (req, res) => {
+journalRoutes.get("/entries/:year", (req, res) => {
     const query = JournalEntry.find({user: req.user._id});
     const nextYear = (Number(req.params.year) + 1).toString();
 

@@ -11,6 +11,8 @@ class JournalContainer extends React.Component {
     componentDidMount() {
         if (this.props.match.params.id) {
             this.props.getEntry(this.props.match.params.id);
+            document.getElementById("blank-form").style.display = "none";
+            document.getElementById("entry-form").style.display = "flex";
         }
     }
 

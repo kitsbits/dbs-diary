@@ -1,9 +1,3 @@
-// if (document.getElementById("blank-form").style.display === "flex") {
-//     document.getElementById("blank-form").style.display = "none";
-//     document.getElementById("entry-form").style.display = "flex";
-// }
-// this.props.handleStart;
-
 import React from "react";
 import JournalContainer from "./journal/JournalContainer";
 import CalContainer from "./calendar/CalContainer";
@@ -17,6 +11,12 @@ import moment from "moment";
 import axios from "axios";
 
 // import * as api from "../../../api";
+
+axios.interceptors.request.use(config => {
+    const token = localStorage.getItem("token");
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+});
 
 const url = "http://localhost:10100/journal/";
 const now = new Date();
@@ -251,7 +251,6 @@ class Journal extends React.Component {
                     ...prevState,
                     journal: response.data
                 }
-
             })
         }).catch(err => {
             console.log(err);
@@ -312,21 +311,21 @@ class Journal extends React.Component {
                                         clearJournal={this.clearJournal}{...props}/>
                             )
                         }}/>
-                        <Route path="/journal/:year/:month/:day" render={props => {
+                        <Route path="/journal/entries/:year/:month/:day" render={props => {
                             return (
                                 <EntriesContainer
                                     getEntries={this.getEntries}
                                     state={this.state.entries}{...props}/>
                             )
                         }}/>
-                        <Route path="/journal/:year/:month" render={props => {
+                        <Route path="/journal/entries/:year/:month" render={props => {
                             return (
                                 <EntriesContainer
                                     getEntries={this.getEntries}
                                     state={this.state.entries}{...props}/>
                             )
                         }}/>
-                        <Route path="/journal/:year" render={props => {
+                        <Route path="/journal/entries/:year" render={props => {
                             return (
                                 <EntriesContainer
                                     getEntries={this.getEntries}
