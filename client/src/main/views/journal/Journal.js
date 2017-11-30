@@ -1,3 +1,9 @@
+// if (document.getElementById("blank-form").style.display === "flex") {
+//     document.getElementById("blank-form").style.display = "none";
+//     document.getElementById("entry-form").style.display = "flex";
+// }
+// this.props.handleStart;
+
 import React from "react";
 import JournalContainer from "./journal/JournalContainer";
 import CalContainer from "./calendar/CalContainer";
@@ -29,7 +35,7 @@ class Journal extends React.Component {
             calendar: {
                 thisMonthsDays: [],
                 thisYearsMonths: [],
-                allYears: [now.getFullYear(), now.getFullYear() - 1, now.getFullYear() - 2],
+                allYears: [now.getFullYear()],
                 month: now.getMonth(),
                 year: now.getFullYear(),
                 day: now.getDate(),
@@ -198,8 +204,7 @@ class Journal extends React.Component {
         });
     }
 
-    handleStart(event) {
-        event.preventDefault();
+    handleStart() {
         axios.post(url, {title: ""}).then(response => {
             this.setState(prevState => {
                 return {

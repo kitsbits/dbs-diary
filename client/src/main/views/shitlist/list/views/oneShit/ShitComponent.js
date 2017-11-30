@@ -5,7 +5,7 @@ export default function Shit(props) {
     const date = moment(props.input.createdAt).format('MMMM Do YYYY, h:mm:ss a');
     const containerStyles = {
         display: "flex",
-        padding: "55px"
+        padding: "55px",
     }
 
     const shitContainerStyles = {
@@ -17,22 +17,22 @@ export default function Shit(props) {
         color: "green",
         padding: "55px",
         height: "450px",
-        width: "350px"
+        width: "350px",
     }
 
     const nameStyles = {
         width: "250px",
-        marginBottom: "10px"
+        marginBottom: "10px",
     }
 
     const dateStyles = {
         width: "250px",
-        marginBottom: "10px"
+        marginBottom: "10px",
     }
 
     const locationStyles = {
         width: "250px",
-        marginBottom: "10px"
+        marginBottom: "10px",
     }
 
     const detailsContainer = {
@@ -41,7 +41,7 @@ export default function Shit(props) {
         height: "50%",
         overflow: "scroll",
         width: "250px",
-        marginBottom: "10px"
+        marginBottom: "10px",
     }
 
     const formStyles = {
@@ -52,7 +52,7 @@ export default function Shit(props) {
         border: "2px solid yellow",
         color: "yellow",
         height: "450px",
-        width: "350px"
+        width: "350px",
     }
 
     const nameInputStyles = {
@@ -63,7 +63,7 @@ export default function Shit(props) {
         border: "2px solid yellow",
         color: "yellow",
         fontSize: "2em",
-        marginBottom: "10px"
+        marginBottom: "10px",
     }
 
     const locationInputStyles = {
@@ -74,7 +74,7 @@ export default function Shit(props) {
         border: "2px solid yellow",
         color: "yellow",
         fontSize: "1.25em",
-        marginBottom: "10px"
+        marginBottom: "10px",
     }
 
     const detailsInputStyles = {
@@ -85,7 +85,7 @@ export default function Shit(props) {
         border: "2px solid yellow",
         color: "yellow",
         fontSize: "1.25em",
-        marginBottom: "10px"
+        marginBottom: "10px",
     }
 
     const editButtonStyles = {
@@ -96,7 +96,8 @@ export default function Shit(props) {
         border: "2px solid green",
         color: "green",
         fontSize: "1.25em",
-        cursor: "pointer"
+        cursor: "pointer",
+        borderRadius: "0px",
     }
 
     const updateButtonStyles = {
@@ -107,7 +108,8 @@ export default function Shit(props) {
         border: "2px solid yellow",
         color: "yellow",
         fontSize: "1.25em",
-        cursor: "pointer"
+        cursor: "pointer",
+        borderRadius: "0px",
     }
 
     return (

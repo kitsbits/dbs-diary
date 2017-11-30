@@ -2,7 +2,7 @@ import React from "react";
 
 export default function AddComponent(props) {
     const containerStyles = {
-        marginBottom: "55px"
+        marginBottom: "55px",
     }
 
     const formStyles = {
@@ -11,7 +11,7 @@ export default function AddComponent(props) {
         justifyContent: "space-around",
         alignContent: "center",
         width: "350px",
-        height: "300px"
+        height: "300px",
     }
 
     const inputStyles = {
@@ -21,7 +21,7 @@ export default function AddComponent(props) {
         outline: "none",
         fontSize: "1em",
         border: "2px solid green",
-        paddingLeft: "15px"
+        paddingLeft: "15px",
     }
 
     const textAreaStyles = {
@@ -31,7 +31,7 @@ export default function AddComponent(props) {
         outline: "none",
         fontSize: "1em",
         border: "2px solid green",
-        paddingLeft: "15px"
+        paddingLeft: "15px",
     }
 
     const buttonStyles = {
@@ -40,7 +40,8 @@ export default function AddComponent(props) {
         color: "green",
         outline: "none",
         fontSize: "1.5em",
-        border: "2px solid green"
+        border: "2px solid green",
+        borderRadius: "0px",
     }
 
     return (

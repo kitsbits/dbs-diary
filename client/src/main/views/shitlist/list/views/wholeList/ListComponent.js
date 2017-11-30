@@ -6,15 +6,15 @@ export default function ListComponent(props) {
     const date = moment(props.shit.createdAt).format('MMMM Do');
 
     const nameStyles = {
-        margin: "0"
+        margin: "0",
     }
 
     const dateStyles = {
-        margin: "0"
+        margin: "0",
     }
 
     const locationStyles = {
-        margin: "0 0 10px 0"
+        margin: "0 0 10px 0",
     }
 
     const buttonStyles = {
@@ -24,7 +24,8 @@ export default function ListComponent(props) {
         fontSize: "1em",
         textDecoration: "none",
         cursor: "pointer",
-        marginTop: "15px"
+        marginTop: "15px",
+        borderRadius: "0px",
     }
 
     return (

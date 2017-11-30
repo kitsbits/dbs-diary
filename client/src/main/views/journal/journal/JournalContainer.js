@@ -5,6 +5,7 @@ class JournalContainer extends React.Component {
 
     constructor() {
         super();
+        this.handleStart = this.handleStart.bind(this);
     }
 
     componentDidMount() {
@@ -19,12 +20,20 @@ class JournalContainer extends React.Component {
         }
     }
 
+    handleStart(e) {
+        if (document.getElementById("blank-form").style.display === "flex") {
+            document.getElementById("blank-form").style.display = "none";
+            document.getElementById("entry-form").style.display = "flex";
+        }
+        this.props.handleStart();
+    }
+
     render() {
         return (
             <JournalComponent
                 input={this.props.input}
                 handleChange={this.props.handleChange}
-                handleStart={this.props.handleStart}
+                handleStart={this.handleStart}
                 handleSave={this.props.handleSave}
                 handleDelete={this.props.handleDelete}/>
         )

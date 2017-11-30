@@ -5,12 +5,17 @@ export default function JournalComponent(props) {
         display: "flex",
         flexDirection: "column",
         width: "65%",
-        padding: "25px"
+        padding: "25px",
     }
 
     const formStyles = {
+        display: "none",
+        flexDirection: "column",
+    }
+
+    const blankFormStyles = {
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
     }
 
     const startButtonStyles = {
@@ -20,7 +25,8 @@ export default function JournalComponent(props) {
         color: "yellow",
         fontSize: "1.5em",
         marginTop: "10px",
-        cursor: "pointer"
+        cursor: "pointer",
+        borderRadius: "0px",
     }
 
     const saveButtonStyles = {
@@ -31,7 +37,8 @@ export default function JournalComponent(props) {
         fontSize: "1.5em",
         width: "155px",
         marginTop: "25px",
-        cursor: "pointer"
+        cursor: "pointer",
+        borderRadius: "0px",
     }
     const deleteButtonStyles = {
         outline: "none",
@@ -44,7 +51,8 @@ export default function JournalComponent(props) {
         marginLeft: "15px",
         cursor: "pointer",
         marginRight: "55px",
-        display: props.input.title === undefined ? "none" : "inline"
+        display: props.input.title === undefined ? "none" : "inline",
+        borderRadius: "0px",
     }
 
     const titleInputStyles = {
@@ -55,7 +63,7 @@ export default function JournalComponent(props) {
         color: "white",
         fontSize: "1.5em",
         marginTop: "25px",
-        padding: "10px"
+        padding: "10px",
     }
 
     const entryTextStyles = {
@@ -68,17 +76,45 @@ export default function JournalComponent(props) {
         padding: "15px",
         border: "2px solid white",
         marginTop: "25px",
-        overflow: "scroll"
+        overflow: "scroll",
+    }
+
+    const blankTitleInputStyles = {
+        outline: "none",
+        backgroundColor: "transparent",
+        border: "none",
+        border: "2px solid grey",
+        color: "grey",
+        fontSize: "1.5em",
+        marginTop: "25px",
+        padding: "10px",
+    }
+
+    const blankEntryTextStyles = {
+        outline: "none",
+        backgroundColor: "transparent",
+        color: "grey",
+        height: "65vh",
+        border: "none",
+        fontSize: "1em",
+        padding: "15px",
+        border: "2px solid grey",
+        marginTop: "25px",
+        overflow: "scroll",
     }
 
     const buttonContainerStyles = {
-        alignSelf: "flex-end"
+        alignSelf: "flex-end",
     }
 
     return (
         <div style={containerStyles}>
             <h1>HELLO, THERE. TELL ME YOUR SECRETS...</h1>
-            <button onClick={props.handleStart} type="button" style={startButtonStyles}>START NEW ENTRY</button>
+            <button onClick={props.handleStart } type="button" style={startButtonStyles}>START NEW ENTRY</button>
+            <div id="blank-form" style={blankFormStyles}>
+                <div style={blankTitleInputStyles}>ENTRY TITLE...</div>
+                <div style={blankEntryTextStyles}>LET IT OUT...</div>
+            </div>
             <form id="entry-form" onSubmit={props.handleSave} style={formStyles}>
                 <input onChange={props.handleChange} type="text" name="title" value={props.input.title} placeholder="ENTRY TITLE..." style={titleInputStyles}/>
                 <textarea onChange={props.handleChange} name="text" placeholder="LET IT OUT..." value={props.input.text} style={entryTextStyles}></textarea>
