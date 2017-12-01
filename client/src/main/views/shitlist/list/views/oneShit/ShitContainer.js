@@ -15,7 +15,7 @@ class ShitContainer extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:10100/shitlist/${this.props.match.params.id}`).then(response => {
+        axios.get(`/shitlist/${this.props.match.params.id}`).then(response => {
             this.setState(response.data);
         }).catch(err => {
             console.log(err);

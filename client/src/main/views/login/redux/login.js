@@ -1,6 +1,6 @@
 // ACTIONS \\
 import axios from "axios";
-const authUrl = "http://localhost:10100/auth/";
+const authUrl = "/auth/";
 
 // include token in axios requests
 axios.interceptors.request.use(config => {

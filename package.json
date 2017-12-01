@@ -4,7 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "deploy": "now --public"
+  },
+  "now": {
+    "alias":"dbs-diary",
+    "name": "dbs-diary",
+    "env": {
+      "PORT": 10100,
+      "SECRET": "@secret",
+      "DB": "@db"
+    }
   },
   "keywords": [],
   "author": "",
@@ -18,6 +29,7 @@
     "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.12.5",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7"
   }
 }
