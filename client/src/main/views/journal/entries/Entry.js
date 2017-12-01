@@ -67,7 +67,8 @@ function Entry(props) {
         color: "yellow",
         fontSize: "1em",
         cursor: "pointer",
-        outline: "none"
+        outline: "none",
+        borderRadius: "0px",
     }
 
     return (
