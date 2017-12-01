@@ -42,8 +42,7 @@ class EntriesContainer extends React.Component {
         return (
             // entries.length <= 0 ?
             //     <Redirect to="/journal"/> :
-            //     <div style={containerStyles}>{entries}</div>
-            <div style={containerStyles}>{entries}</div>
+                <div style={containerStyles}>{entries}</div>
 
         )
     }
