@@ -20,7 +20,7 @@ axios.interceptors.request.use(config => {
 
 const url = "/journal/";
 const now = new Date();
-const days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+const days = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
 
 const containerStyles = {
     display: "flex",
@@ -270,8 +270,7 @@ class Journal extends React.Component {
     /// ENTRIES METHODS \\\
     ///////////////////////
     getEntries(pathname) {
-        let url = "/";
-        this.props.getEntries(url, pathname);
+        this.props.getEntries(pathname);
     }
 
 
