@@ -9,9 +9,7 @@ const config = require("./settings");
 
 app.use(express.static(path.resolve(__dirname, "client", "build")));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-});
+
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -28,6 +26,10 @@ mongoose.connect(config.db,
     }
 );
 
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
+
 app.listen(config.port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${config.port}`);
 });
