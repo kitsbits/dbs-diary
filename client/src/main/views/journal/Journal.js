@@ -101,7 +101,7 @@ class Journal extends React.Component {
     }
 
     getMonthsPosts() {
-        axios.get(url, {
+        axios.get(url + "entries/", {
             params: {
                 year: this.state.calendar.year,
                 month: this.state.calendar.month
