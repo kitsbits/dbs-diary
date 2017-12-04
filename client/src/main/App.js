@@ -9,7 +9,7 @@ import ListLanding from "./views/shitlist/list/ListLanding";
 import Signin from "./views/login/signin/Container";
 import Signup from "./views/login/signup/Container";
 
-export default function App() {
+export default function App(props) {
     return (
         <div>
             <Switch>

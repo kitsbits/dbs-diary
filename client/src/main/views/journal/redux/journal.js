@@ -39,9 +39,9 @@ export function deleteEntry(id) {
     }
 }
 
-export function getEntries(url, pathname) {
+export function getEntries(pathname) {
     return (dispatch) => {
-        axios.get(url + pathname).then(response => {
+        axios.get(pathname).then(response => {
             dispatch({
                 type: "GET_ENTRIES",
                 entries: response.data
