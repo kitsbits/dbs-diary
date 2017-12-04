@@ -1,6 +1,6 @@
 // ACTIONS \\
 import axios from "axios";
-const url = "https://dbs-diary.herokuapp.com/journal/";
+const url = "/journal/";
 
 // include token in axios requests
 axios.interceptors.request.use(config => {
