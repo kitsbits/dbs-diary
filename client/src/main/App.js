@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { verify } from "./login/redux/login";
+import { verify } from "./views/login/redux/login";
 
 import ProtectedRoute from "./ProtectedRoutes";
 import Calculator from "./views/calculator/Calculator";
