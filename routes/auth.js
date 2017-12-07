@@ -101,4 +101,26 @@ authRouter.post("/login", passport.authenticate("local", {session: false}), (req
     });
 });
 
+authRouter.route("/verify")
+    .get((req, res) => {
+        User.findById(req.user._id, (err, user) => {
+            if(err){
+                res.status(500).send({
+                    success: false,
+                    err
+                })
+            } else if(user === null){
+                res.status(400).send({
+                    success: false,
+                    err: "User not found!"
+                })
+            } else {
+                res.status(200).send({
+                    success: true,
+                    user: user.withoutPassword(),
+                })
+            }
+        })
+    });
+
 module.exports = authRouter;

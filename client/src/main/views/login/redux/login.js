@@ -54,6 +54,20 @@ export function logout() {
     }
 }
 
+export function verify(history, pathname) {
+    return (dispatch) => {
+        axios.get("/auth/verify")
+        .then(response => {
+            const {success, user} = response.data;
+            dispatch(logon(success, user));
+            history.push(pathname);
+        })
+        .catch(err => {
+            console.error(err);
+        })
+    }
+}
+
 // STATE \\
 const state = {
     user: {
