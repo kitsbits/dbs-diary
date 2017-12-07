@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { verify } from "./views/login/redux/login";
+import { verify } from "./views/login/redux/login.js";
+import { connect } from "react-redux";
 
 import ProtectedRoute from "./ProtectedRoutes";
 import Calculator from "./views/calculator/Calculator";
@@ -10,8 +11,9 @@ import ListLanding from "./views/shitlist/list/ListLanding";
 import Signin from "./views/login/signin/Container";
 import Signup from "./views/login/signup/Container";
 
-export default class App extends React.Component {
+class App extends React.Component {
     componentDidMount() {
+        // console.log(this.props)
         this.props.verify();
     }
 
@@ -30,3 +32,5 @@ export default class App extends React.Component {
         )
     }
 }
+
+export default connect(null, {verify})(App);
