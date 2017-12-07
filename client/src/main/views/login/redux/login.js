@@ -47,16 +47,9 @@ export function signin(credentials, history) {
     }
 }
 
-export function logout() {
-    localStorage.removeItem("token");
-    return {
-        type: "LOGOUT"
-    }
-}
-
 export function verify(history, pathname) {
     return (dispatch) => {
-        axios.get(authUrl + "verify")
+        axios.get("/journal/verify")
         .then(response => {
             const {success, user} = response.data;
             dispatch(logon(success, user));
@@ -65,6 +58,13 @@ export function verify(history, pathname) {
         .catch(err => {
             console.error(err);
         })
+    }
+}
+
+export function logout() {
+    localStorage.removeItem("token");
+    return {
+        type: "LOGOUT"
     }
 }
 

@@ -15,6 +15,27 @@ journalRoutes.get("/", (req, res) => {
         })
 });
 
+journalRoutes.get("/verify", (req, res) => {
+        User.findById(req.user._id, (err, user) => {
+            if(err){
+                res.status(500).send({
+                    success: false,
+                    err
+                })
+            } else if(user === null){
+                res.status(400).send({
+                    success: false,
+                    err: "User not found!"
+                })
+            } else {
+                res.status(200).send({
+                    success: true,
+                    user: user.withoutPassword(),
+                })
+            }
+        })
+    });
+
 journalRoutes.get("/entries/:year/:month/:day", (req, res) => {
     const query = JournalEntry.find({user: req.user._id});
     const nextDay = (Number(req.params.day) + 1).toString();
