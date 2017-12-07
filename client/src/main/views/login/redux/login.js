@@ -56,7 +56,7 @@ export function logout() {
 
 export function verify(history, pathname) {
     return (dispatch) => {
-        axios.get("/auth/verify")
+        axios.get(authUrl + "verify")
         .then(response => {
             const {success, user} = response.data;
             dispatch(logon(success, user));
