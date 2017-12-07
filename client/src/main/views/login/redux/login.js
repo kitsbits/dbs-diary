@@ -47,13 +47,13 @@ export function signin(credentials, history) {
     }
 }
 
-export function verify(history, pathname) {
+export function verify() {
     return (dispatch) => {
         axios.get("/journal/verify")
         .then(response => {
             const {success, user} = response.data;
             dispatch(logon(success, user));
-            history.push(pathname);
+            // history.push(pathname);
         })
         .catch(err => {
             console.error(err);
