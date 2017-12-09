@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import { verify } from "./views/login/redux/login.js";
 import { connect } from "react-redux";
 
@@ -13,8 +13,7 @@ import Signup from "./views/login/signup/Container";
 
 class App extends React.Component {
     componentDidMount() {
-        // console.log(this.props)
-        // this.props.verify();
+        this.props.verify(this.props.history, this.props.history.location.pathname);
     }
 
     render() {
@@ -33,4 +32,4 @@ class App extends React.Component {
     }
 }
 
-export default connect(null, {verify})(App);
+export default withRouter(connect(null, {verify})(App));

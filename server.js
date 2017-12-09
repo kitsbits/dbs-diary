@@ -12,8 +12,8 @@ app.use(express.static(path.resolve(__dirname, "client", "build")));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use("/shitlist", require("./routes/shitList"));
-app.use("/journal", require("./routes/journal"));
+app.use("/api/shitlist", require("./routes/shitList"));
+app.use("/api/journal", require("./routes/journal"));
 app.use("/auth", require("./routes/auth"));
 
 mongoose.connect(config.db,
@@ -24,7 +24,7 @@ mongoose.connect(config.db,
     }
 );
 
-app.get("/", (req, res) => {
+app.get(/\/.*/, (req, res) => {
   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 });
 

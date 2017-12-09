@@ -1,6 +1,6 @@
 // ACTIONS \\
 import axios from "axios";
-const url = "/journal/";
+const url = "/api/journal/";
 
 // include token in axios requests
 axios.interceptors.request.use(config => {

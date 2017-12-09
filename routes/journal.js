@@ -1,19 +1,12 @@
 const express = require("express");
 const JournalEntry = require("../models/journalEntry");
+const User = require("../models/user");
 const expressJwt = require("express-jwt");
 const settings = require("../settings");
 
 const journalRoutes = express.Router();
 
 journalRoutes.use(expressJwt({secret: settings.secret}));
-
-journalRoutes.get("/", (req, res) => {
-    JournalEntry.find({user: req.user._id})
-        .exec((err, entries) => {
-            if (err) return res.status(500).send(err);
-            return res.send(entries);
-        })
-});
 
 journalRoutes.get("/verify", (req, res) => {
     User.findById(req.user._id, (err, user) => {
@@ -34,6 +27,14 @@ journalRoutes.get("/verify", (req, res) => {
             })
         }
     })
+});
+
+journalRoutes.get("/", (req, res) => {
+    JournalEntry.find({user: req.user._id})
+        .exec((err, entries) => {
+            if (err) return res.status(500).send(err);
+            return res.send(entries);
+        })
 });
 
 journalRoutes.get("/entries/:year/:month/:day", (req, res) => {

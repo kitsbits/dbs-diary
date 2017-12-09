@@ -1,6 +1,6 @@
 // ACTIONS \\
 import axios from "axios";
-let url = "/shitlist/"
+let url = "/api/shitlist/"
 
 // include token in axios requests
 axios.interceptors.request.use(config => {

@@ -18,7 +18,7 @@ axios.interceptors.request.use(config => {
     return config;
 });
 
-const url = "/journal/";
+const url = "/api/journal/";
 const now = new Date();
 const days = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
 
