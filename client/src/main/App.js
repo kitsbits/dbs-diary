@@ -14,7 +14,7 @@ import Signup from "./views/login/signup/Container";
 class App extends React.Component {
     componentDidMount() {
         // console.log(this.props)
-        this.props.verify();
+        // this.props.verify();
     }
 
     render() {
