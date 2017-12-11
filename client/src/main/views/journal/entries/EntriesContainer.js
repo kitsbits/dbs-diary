@@ -8,13 +8,11 @@ class EntriesContainer extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.location.pathname !== this.props.location.pathname) {
-            console.log(nextProps.location.pathname);
             this.props.getEntries(nextProps.location.pathname);
         }
     }
 
     componentWillMount() {
-        console.log(this.props.location.pathname);
         this.props.getEntries(this.props.location.pathname);
     }
 
@@ -41,10 +39,11 @@ class EntriesContainer extends React.Component {
             marginTop: "50px"
         }
         const entries = this.genEntries();
+        console.log(this.props.location.pathname);
         return (
             // entries.length <= 0 ?
             //     <Redirect to="/journal"/> :
-                <div style={containerStyles}>{entries}</div>
+                <div style={containerStyles}>hi</div>
 
         )
     }

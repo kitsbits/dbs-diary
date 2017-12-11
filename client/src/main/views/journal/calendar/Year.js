@@ -10,6 +10,6 @@ export default function Year(props) {
     }
 
     return (
-        <Link to={`/journal/entries/${props.year}`} style={yearNames}>{props.year}</Link>
+        <Link to={`/entries/${props.year}`} style={yearNames}>{props.year}</Link>
     )
 }

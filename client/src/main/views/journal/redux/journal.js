@@ -2,7 +2,6 @@
 import axios from "axios";
 const url = "/api/journal/";
 
-// include token in axios requests
 axios.interceptors.request.use(config => {
     const token = localStorage.getItem("token");
     config.headers.Authorization = `Bearer ${token}`;

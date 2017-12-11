@@ -310,21 +310,21 @@ class Journal extends React.Component {
                                         clearJournal={this.clearJournal}{...props}/>
                             )
                         }}/>
-                        <Route path="/journal/entries/:year/:month/:day" render={props => {
+                        <Route path="/entries/:year/:month/:day" render={props => {
                             return (
                                 <EntriesContainer
                                     getEntries={this.getEntries}
                                     state={this.state.entries}{...props}/>
                             )
                         }}/>
-                        <Route path="/journal/entries/:year/:month" render={props => {
+                        <Route path="/entries/:year/:month" render={props => {
                             return (
                                 <EntriesContainer
                                     getEntries={this.getEntries}
                                     state={this.state.entries}{...props}/>
                             )
                         }}/>
-                        <Route path="/journal/entries/:year" render={props => {
+                        <Route path="/entries/:year" render={props => {
                             return (
                                 <EntriesContainer
                                     getEntries={this.getEntries}

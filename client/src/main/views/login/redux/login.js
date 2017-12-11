@@ -49,7 +49,7 @@ export function signin(credentials, history) {
 
 export function verify(history, pathname) {
     return (dispatch) => {
-        axios.get("/journal/verify")
+        axios.get("/refresh/verify")
         .then(response => {
             const {success, user} = response.data;
             dispatch(logon(success, user));

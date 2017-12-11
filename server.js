@@ -12,9 +12,12 @@ app.use(express.static(path.resolve(__dirname, "client", "build")));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use("/api/shitlist", require("./routes/shitList"));
-app.use("/api/journal", require("./routes/journal"));
 app.use("/auth", require("./routes/auth"));
+app.use("/refresh", require("./routes/verify"));
+app.use("/entries", require("./routes/entries"));
+app.use("/api/journal", require("./routes/journal"));
+app.use("/api/shitlist", require("./routes/shitList"));
+
 
 mongoose.connect(config.db,
     { keepAlive: true, reconnectTries: Number.MAX_VALUE, useMongoClient: true },
