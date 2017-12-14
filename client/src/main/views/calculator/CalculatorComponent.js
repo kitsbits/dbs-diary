@@ -46,6 +46,7 @@ export default function CalculatorComponent(props) {
         fontSize: "3em",
         outline: "none",
         margin: "0",
+        padding: "0",
     }
 
     const tabulationStyles = {
