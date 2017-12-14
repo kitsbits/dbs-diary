@@ -294,6 +294,7 @@ class Journal extends React.Component {
     /// RENDER \\\
     //////////////
     render() {
+        console.log(this.props)
         return (
             <div>
                 <Navbar/>

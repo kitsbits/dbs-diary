@@ -44,7 +44,8 @@ export default function CalculatorComponent(props) {
         backgroundColor: "transparent",
         color: "green",
         fontSize: "3em",
-        outline: "none"
+        outline: "none",
+        margin: "0",
     }
 
     const tabulationStyles = {

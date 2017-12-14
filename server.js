@@ -14,7 +14,7 @@ app.use(cors());
 
 app.use("/auth", require("./routes/auth"));
 app.use("/refresh", require("./routes/verify"));
-app.use("/entries", require("./routes/entries"));
+app.use("/api/entries", require("./routes/entries"));
 app.use("/api/journal", require("./routes/journal"));
 app.use("/api/shitlist", require("./routes/shitList"));
 

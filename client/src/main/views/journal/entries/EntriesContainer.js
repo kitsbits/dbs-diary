@@ -36,21 +36,23 @@ class EntriesContainer extends React.Component {
             justifyContent: "space-around",
             width: "65%",
             padding: "25px",
-            marginTop: "50px"
+            marginTop: "50px",
+            backgroundColor: "red",
+            height: "100px",
         }
-        const entries = this.genEntries();
+        // const entries = this.genEntries();
         console.log(this.props.location.pathname);
         return (
             // entries.length <= 0 ?
             //     <Redirect to="/journal"/> :
-                <div style={containerStyles}>hi</div>
+                <div style={containerStyles}>{this.props.entries}</div>
 
         )
     }
 }
 
 function mapStateToProps(state) {
-    return state
+    return state;
 }
 
 export default connect(mapStateToProps, null)(EntriesContainer);
