@@ -8,12 +8,12 @@ class EntriesContainer extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.location.pathname !== this.props.location.pathname) {
-            this.props.getEntries(nextProps.location.pathname);
+            this.props.getEntries(`/api${nextProps.location.pathname}`);
         }
     }
 
     componentWillMount() {
-        this.props.getEntries(this.props.location.pathname);
+        this.props.getEntries(`/api${this.props.location.pathname}`);
     }
 
     genEntries() {
@@ -37,15 +37,13 @@ class EntriesContainer extends React.Component {
             width: "65%",
             padding: "25px",
             marginTop: "50px",
-            backgroundColor: "red",
-            height: "100px",
         }
         // const entries = this.genEntries();
-        console.log(this.props.location.pathname);
+        console.log(`/api${this.props.location.pathname}`);
         return (
             // entries.length <= 0 ?
             //     <Redirect to="/journal"/> :
-                <div style={containerStyles}>{this.props.entries}</div>
+                <div style={containerStyles}>{this.genEntries()}</div>
 
         )
     }

@@ -47,7 +47,7 @@ export function getEntries(pathname) {
             })
         }).catch(err => {
             console.log(err);
-        })
+        });
     }
 }
 
