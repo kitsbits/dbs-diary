@@ -1,8 +1,7 @@
 // ACTIONS \\
 import axios from "axios";
-const url = "http://localhost:10100/journal/";
+const url = "/api/journal/";
 
-// include token in axios requests
 axios.interceptors.request.use(config => {
     const token = localStorage.getItem("token");
     config.headers.Authorization = `Bearer ${token}`;
@@ -39,16 +38,16 @@ export function deleteEntry(id) {
     }
 }
 
-export function getEntries(url, pathname) {
+export function getEntries(pathname) {
     return (dispatch) => {
-        axios.get(url+pathname).then(response => {
+        axios.get(pathname).then(response => {
             dispatch({
                 type: "GET_ENTRIES",
                 entries: response.data
             })
         }).catch(err => {
             console.log(err);
-        })
+        });
     }
 }
 

@@ -3,8 +3,8 @@ import JournalComponent from "./JournalComponent";
 
 class JournalContainer extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.handleStart = this.handleStart.bind(this);
     }
 

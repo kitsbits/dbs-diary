@@ -6,7 +6,6 @@ const settings = require("../settings");
 
 shitListRoutes.use(expressJwt({secret: settings.secret}));
 
-
 shitListRoutes.get("/", (req, res) => {
     ListItem.find({user: req.user._id}, (err, shitlist) => {
         if (err) return res.status(500).send(err);

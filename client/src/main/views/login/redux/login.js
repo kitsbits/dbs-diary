@@ -1,6 +1,6 @@
 // ACTIONS \\
 import axios from "axios";
-const authUrl = "http://localhost:10100/auth/";
+const authUrl = "/auth/";
 
 // include token in axios requests
 axios.interceptors.request.use(config => {
@@ -43,6 +43,20 @@ export function signin(credentials, history) {
         }).catch(err => {
             console.log(err);
             dispatch(handleAuthErr("signin", err.response.status));
+        })
+    }
+}
+
+export function verify(history, pathname) {
+    return (dispatch) => {
+        axios.get("/refresh/verify")
+        .then(response => {
+            const {success, user} = response.data;
+            dispatch(logon(success, user));
+            history.push(pathname);
+        })
+        .catch(err => {
+            console.error(err);
         })
     }
 }

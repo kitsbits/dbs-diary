@@ -18,9 +18,9 @@ axios.interceptors.request.use(config => {
     return config;
 });
 
-const url = "http://localhost:10100/journal/";
+const url = "/api/journal/";
 const now = new Date();
-const days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+const days = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
 
 const containerStyles = {
     display: "flex",
@@ -270,8 +270,7 @@ class Journal extends React.Component {
     /// ENTRIES METHODS \\\
     ///////////////////////
     getEntries(pathname) {
-        let url = "http://localhost:10100";
-        this.props.getEntries(url, pathname);
+        this.props.getEntries(pathname);
     }
 
 
@@ -295,6 +294,7 @@ class Journal extends React.Component {
     /// RENDER \\\
     //////////////
     render() {
+        console.log(this.props)
         return (
             <div>
                 <Navbar/>
