@@ -61,9 +61,7 @@ authRouter.post("/signup", (req, res) => {
                     res.status(201).send({
                         success: true,
                         user: user.withoutPassword(),
-                        token: jwt.sign(user.withoutPassword(), settings.secret, {
-                            expiresIn: 60 * 30 * 24
-                        })
+                        token: jwt.sign(user.withoutPassword(), settings.secret)
                     });
                 }
             });
@@ -93,9 +91,7 @@ authRouter.post("/login", passport.authenticate("local", {session: false}), (req
             res.status(201).send({
                 success: true,
                 user: user.withoutPassword(),
-                token: jwt.sign(user.withoutPassword(), settings.secret, {
-                    expiresIn: 60 * 30 * 24
-                })
+                token: jwt.sign(user.withoutPassword(), settings.secret)
             });
         }
     });
